@@ -2,6 +2,7 @@ package com.springboot.influlims.service;
 
 import com.springboot.influlims.service.interfaces.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ public class SecurityServiceImpl implements SecurityService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Qualifier("userDetailsServiceImpl")
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -36,16 +38,16 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public void autoLogin(String username, String password) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+	public void autoLogin(String login, String password) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(login);
+
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
 		authenticationManager.authenticate(authenticationToken);
 
 		if (authenticationToken.isAuthenticated()) {
 			SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
+			System.out.println("Successfully " + login + " auto logged in with password " + password);
 //			logger.debug(String.format("Successfully %s auto logged in", username));
 		}
 	}
