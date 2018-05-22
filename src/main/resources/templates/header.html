@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/balloon.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<input type="checkbox" id="side-menu-toggle" class="side-menu-toggle">
+<label for="side-menu-toggle" class="side-menu-icon">
+    <i class="fa fa-bars"></i>
+</label>
+<div th:include="menu"></div>
+<div th:include="top-bar"></div>
