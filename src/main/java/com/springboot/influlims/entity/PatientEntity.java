@@ -49,7 +49,7 @@ public class PatientEntity extends RegionUserDependentEntity {
 	private Short patientAge;
 
 	@Basic
-	@Column(nullable = false, columnDefinition = "TINYINT(2) UNSIGNED")
+	@Column(columnDefinition = "TINYINT(2) UNSIGNED DEFAULT 0")
 	private Byte patientMonths;
 
 	@Basic
@@ -59,13 +59,13 @@ public class PatientEntity extends RegionUserDependentEntity {
 
 	@Basic
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 1)
+	@Column(nullable = false, length = 1, columnDefinition = "VARCHAR(1) DEFAULT 'X'")
 	private Gender patientGender;
 
 	@Basic
-	@Enumerated(EnumType.ORDINAL)
-	@Column(columnDefinition = "BIT(1)")
-	protected Vaccine isVaccinated;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 1, columnDefinition = "VARCHAR(1) DEFAULT 'X'")
+	private Vaccine isVaccinated;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId", foreignKey = @ForeignKey(name = "FK_patients_user", foreignKeyDefinition = "FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE RESTRICT ON UPDATE CASCADE"))

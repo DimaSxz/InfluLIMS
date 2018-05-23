@@ -15,10 +15,10 @@
     <aside class="side-menu">
         <a href="/" class="logo logo-menu"></a>
         <div class="side-menu__season">
-            Текущий сезон: <span>2017-2018</span>
+            Текущий сезон: <span th:text="${season}"></span>
         </div>
         <ul class="side-menu__pages-list">
-            <li class="active" onclick="location.href='main.html'">
+            <li class="active" onclick="location.href='/main'">
                 <span class="side-menu__icon-container">
                     <i class="fas fa-newspaper"></i>
                 </span>

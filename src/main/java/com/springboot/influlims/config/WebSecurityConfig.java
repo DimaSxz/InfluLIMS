@@ -16,13 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	private String sequrityKey = Long.toString(new Random().nextLong());
-
 //	@Autowired
 //	private DataSource dataSource;
 
 	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
+	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
 		httpSecurity
 			.csrf()
@@ -35,14 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/add-sample").hasAnyRole("SUPERADMIN", "ADMIN", "USER", "TEST", "ADD_ALL", "ADD_SAMPLE")
 				.antMatchers("/add-extraction").hasAnyRole("SUPERADMIN", "ADMIN", "USER", "TEST", "ADD_ALL", "ADD_EXTRACTION")
 				.antMatchers("/add-pcr").hasAnyRole("SUPERADMIN", "ADMIN", "USER", "TEST", "ADD_ALL", "ADD_PCR")
-
-				.antMatchers("/samples").not().hasRole("VIEW_NO")
+				.antMatchers("/samples").access("isAuthenticated() and !hasRole('VIEW_NO')")
+//				.antMatchers("/samples").not().hasRole("VIEW_NO")
 
 				.anyRequest().authenticated()
 			.and()
 			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/main",true)
+				.defaultSuccessUrl("/main")
+//				.defaultSuccessUrl("/main",true)
 				.failureForwardUrl("/login?error")
 				.usernameParameter("login")
 				.passwordParameter("password")

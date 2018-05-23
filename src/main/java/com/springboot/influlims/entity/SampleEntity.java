@@ -109,7 +109,7 @@ public class SampleEntity extends UserDependentEntity {
 	private String sampleType;
 
 	@Basic
-	@Column(nullable = false, columnDefinition = "SMALLINT(6) UNSIGNED")
+	@Column(columnDefinition = "SMALLINT(6) UNSIGNED")
 	private Integer volumeIn;
 
 	@Basic

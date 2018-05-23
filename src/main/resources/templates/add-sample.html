@@ -1,135 +1,174 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление образца</title>
+    <title>Главная</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/balloon.min.css">
-    <link rel="stylesheet" href="css/datepicker.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <input type="checkbox" id="side-menu-toggle" class="side-menu-toggle">
-    <label for="side-menu-toggle" class="side-menu-icon">
-        <i class="fa fa-bars"></i>
-    </label>
-    <aside class="side-menu">
-        <div class="logo logo-menu"></div>
-        <div class="side-menu__season">
-            Текущий сезон: <span>2017-2018</span>
-        </div>
-        <ul class="side-menu__pages-list">
-            <li onclick="location.href='main.html'">
+<input type="checkbox" id="side-menu-toggle" class="side-menu-toggle">
+<label for="side-menu-toggle" class="side-menu-icon">
+    <i class="fa fa-bars"></i>
+</label>
+<aside class="side-menu">
+    <a href="/" class="logo logo-menu"></a>
+    <div class="side-menu__season">
+        Текущий сезон: <span th:text="${season}"></span>
+    </div>
+    <ul class="side-menu__pages-list">
+        <li class="active" onclick="location.href='/main'">
                 <span class="side-menu__icon-container">
                     <i class="fas fa-newspaper"></i>
                 </span>
-                Новости
-            </li>
-            <li class="active" onclick="location.href='add-sample.html'">
+            Новости
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_USERS_TEST', 'ROLE_MANAGE_USERS_NOTEST', 'ROLE_MANAGE_USERS_ALL')" onclick="location.href='/manage-users'">
                 <span class="side-menu__icon-container">
-                    <i class="fa fa-plus"></i>
+                    <i class="fas fa-users"></i>
                 </span>
-                Регистрация образца
-            </li>
-            <li onclick="location.href='add-extraction.html'">
+            Пользователи
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROVIDERS_TEST', 'ROLE_MANAGE_PROVIDERS_NOTEST', 'ROLE_MANAGE_PROVIDERS_ALL', 'ROLE_MANAGE_PROVIDERS_SELF')" onclick="location.href='/manage-providers'">
+                <span class="side-menu__icon-container">
+                    <i class="fa fa-truck"></i>
+                </span>
+            Поставщики
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROJECTS_SELF', 'ROLE_MANAGE_PROJECTS_TEST', 'ROLE_MANAGE_PROJECTS_NOTEST', 'ROLE_MANAGE_PROJECTS_ALL')" onclick="location.href='/manage-projects'">
+                <span class="side-menu__icon-container">
+                    <!--<i class="fas fa-user-secret"></i>-->
+                    <i class="fa fa-list-alt"></i>
+                </span>
+            Проекты
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_REAGENTS_SELF', 'ROLE_MANAGE_REAGENTS_TEST', 'ROLE_MANAGE_REAGENTS_NOTEST', 'ROLE_MANAGE_REAGENTS_ALL')" onclick="location.href='/manage-projects'">
                 <span class="side-menu__icon-container">
                     <i class="fa fa-flask"></i>
                 </span>
-                Экстракция
-            </li>
-            <li onclick="location.href='add-pcr.html'">
+            Реагенты
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_SAMPLE')" onclick="location.href='/add-sample'">
+                <span class="side-menu__icon-container">
+                    <i class="fa fa-plus"></i>
+                </span>
+            Регистрация образца
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_EXTRACTION')" onclick="location.href='/add-extraction'">
+                <span class="side-menu__icon-container">
+                    <i class="fa fa-indent"></i>
+                </span>
+            Экстракция
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_PCR')" onclick="location.href='/add-pcr'">
                 <span class="side-menu__icon-container">
                     <i class="fa fa-spinner"></i>
                 </span>
-                ПЦР
-            </li>
-            <li onclick="location.href='samples.html'">
+            ПЦР
+        </li>
+        <li onclick="location.href='/samples'">
                 <span class="side-menu__icon-container">
                     <i class="fa fa-info"></i>
                 </span>
-                Информация об образцах
-            </li>
-            <li onclick="location.href='notindex.html'">
+            Информация об образцах
+        </li>
+        <li onclick="location.href='/logout'">
                 <span class="side-menu__icon-container">
                     <i class="fa fa-sign-out-alt"></i>
                 </span>
-                Выход
-            </li>
-        </ul>
-    </aside>
-    <header class="header">
-        <h3 class="header__title">Новости</h3>
-        <div class="header__panel">
-            <div class="header__user-info">
-                <img class="header__avatar" src="images/ivanov.jpg">
-                <span class="header__name">Иван Иванов</span>
-            </div>
-            <div class="header__notify">
+            Выход
+        </li>
+    </ul>
+</aside>
+<header class="header">
+    <h3 class="header__title">Новости</h3>
+    <div class="header__panel">
+        <div class="header__user-info">
+            <img class="header__avatar" src="images/ivanov.jpg">
+            <span sec:authentication="name" class="header__name"></span> | <span sec:authentication="principal.authorities"></span>
+        </div>
+        <div class="header__notify">
                 <span class="header__notify-wrapper" @click="show = !show">
                     <span class="header__notify-icon">
                         <i class="far fa-bell"></i>
                     </span>
                     <span class="header__notify-quantity" v-if="alertCount > 0">{{ alertCount }}</span>
                 </span>
-                <transition name="fade">
-                    <div class="header__notify-content" v-if="show">
-                        <div class="header__alert">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close" @click="alertClose">
+            <transition name="fade">
+                <div class="header__notify-content" v-if="show">
+                    <div class="header__alert">
+                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
+                        <span class="header__alert-close" @click="alertClose">
                                 <i class="fa fa-times"></i>
                             </span>
-                        </div>
-                        <div class="header__alert" @click="alertClose">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </div>
-                        <div class="header__alert" @click="alertClose">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </div>
                     </div>
-                </transition>
-            </div>
-            <div class="header__search">
-                <form class="header__search-form" method="post">
-                    <input type="text" class="header__search-input" placeholder="Поиск..." v-on:click="activeSearch = !activeSearch">
-                    <span class="icon">
+                    <div class="header__alert" @click="alertClose">
+                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
+                        <span class="header__alert-close">
+                                <i class="fa fa-times"></i>
+                            </span>
+                    </div>
+                    <div class="header__alert" @click="alertClose">
+                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
+                        <span class="header__alert-close">
+                                <i class="fa fa-times"></i>
+                            </span>
+                    </div>
+                </div>
+            </transition>
+        </div>
+        <div class="header__search">
+            <form class="header__search-form">
+                <input type="text" class="header__search-input" placeholder="Поиск..." v-on:click="activeSearch = !activeSearch">
+                <span class="icon">
                         <i class="fas fa-search"></i>
                     </span>
-                </form>
-                <div class="header__search-content" v-if="activeSearch">
-                    <div class="header__search-elem">
-                        <p>Образец №1</p>
-                    </div>
-                    <div class="header__search-elem">
-                        <p>Образец №2</p>
-                    </div>
-                    <div class="header__search-elem">
-                        <p>Образец №3</p>
-                    </div>
+            </form>
+            <div class="header__search-content" v-if="activeSearch">
+                <div class="header__search-elem">
+                    <p>Образец №1</p>
+                </div>
+                <div class="header__search-elem">
+                    <p>Образец №2</p>
+                </div>
+                <div class="header__search-elem">
+                    <p>Образец №3</p>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     <div class="content add-sample">
-        <form action="">
+        <form action="#" th:action="@{/add-sample}" th:object="${addSampleForm}" method="post">
             <div class="add-sample__block-wrapper">
                 <div class="add-sample__left-block">
-                    <div class="add-sample__form-group required">
+                    <div class="add-sample__form-group">
                         <label for="full-name">ФИО пациента</label>
-                        <input type="text" class="add-sample__full-name" id="full-name" name="patientName" required>
+                        <input type="text" class="add-sample__full-name" id="full-name" name="patientName" th:value="*{patientName}">
                     </div>
                     <div class="add-sample__form-group required">
-                        <label for="age">Возраст пациента</label>
-                        <input type="number" min="0" max="150" class="add-sample__age" id="age" name="patientAge" required>
+                        <label for="region">Населенный пункт</label>
+                        <select class="add-sample__city" id="region" name="regionUNID" th:value="*{regionUNID}" required>
+                            <option selected disabled></option>
+                            <option th:each="region : ${regions}" th:value="${region.getRegionUNID()}" th:text="${region.getRegionName()}"></option>
+                        </select>
+                    </div>
+                    <div class="add-sample__form-group required">
+                        <label for="age">Полных лет</label>
+                        <input type="number" min="0" max="150" class="add-sample__age" id="age" name="patientAge" th:value="*{patientAge}" required>
+                    </div>
+                    <div class="add-sample__form-group">
+                        <label for="months">Месяцев</label>
+                        <input type="number" min="0" max="11" class="add-sample__age" id="months" name="patientMonths" th:value="*{patientMonths}">
+                    </div>
+                    <div class="add-sample__form-group required">
+                        <label for="dob">Дата рождения</label>
+                        <input type="text" class="add-sample__date-dob date" id="dob" name="patientDOB" th:value="*{patientDOB}" required>
                     </div>
                     <div class="add-sample__form-group">
                         <label for="gender">Пол пациента</label>
-                        <select class="add-sample__male" id="gender" name="gender">
+                        <select class="add-sample__male" id="gender" name="patientGender" th:value="*{patientGender}">
                             <option value="X" selected>Неизвестно</option>
                             <option value="M">Мужской</option>
                             <option value="F">Женский</option>
@@ -137,23 +176,27 @@
                     </div>
                     <div class="add-sample__form-group">
                         <label for="is-vaccinated">Вакцинирован</label>
-                        <select class="add-sample__is-vaccinated" id="is-vaccinated" name="isVaccinated">
+                        <select class="add-sample__is-vaccinated" id="is-vaccinated" name="isVaccinated" th:value="*{isVaccinated}">
                             <option value="X" selected>Неизвестно</option>
                             <option value="Y">Да</option>
                             <option value="N">Нет</option>
                         </select>
                     </div>
-                    <div class="add-sample__form-group">
+                    <div class="add-sample__form-group required">
                         <label for="date-disease">Дата заболевания</label>
-                        <input type="text" class="add-sample__date-disease date" id="date-disease" name="dateDisease">
+                        <input type="text" class="add-sample__date-disease date" id="date-disease" name="dateDisease" th:value="*{dateDisease}" required>
                     </div>
                     <div class="add-sample__form-group required">
                         <label for="date-sampling">Дата взятия образца</label>
-                        <input type="text" class="add-sample__date-sampling date" id="date-sampling" name="dateReceipt" required>
+                        <input type="text" class="add-sample__date-sampling date" id="date-sampling" name="dateCollection" th:value="*{dateCollection}" required>
+                    </div>
+                    <div class="add-sample__form-group required">
+                        <label for="date-receipt">Дата поступления</label>
+                        <input type="text" class="add-sample__date-receipt date" id="date-receipt" name="dateReceipt" th:value="*{dateReceipt}" required>
                     </div>
                     <div class="add-sample__form-group required">
                         <label for="sample-type">Тип образца</label>
-                        <select class="add-sample__sample-type" id="sample-type" v-model="selected" name="sampleType" required>
+                        <select class="add-sample__sample-type" id="sample-type" v-model="selected" name="sampleType" th:value="*{sampleType}" required>
                             <option selected disabled></option>
                             <option value="1">Мазок из носоглотки</option>
                             <option value="2">Мазок из ротоглотки</option>
@@ -164,7 +207,7 @@
                     </div>
                     <div class="add-sample__form-group required" v-if="isPostmortem">
                         <label for="pm-sample-type">Тип постморт. образца</label>
-                        <select class="add-sample__pm-sample-type" id="pm-sample-type" name="samplePm" required>
+                        <select class="add-sample__pm-sample-type" id="pm-sample-type" name="samplePm" th:value="*{samplePm}" required>
                             <option selected disabled></option>
                             <option value="1">Трахея</option>
                             <option value="2">Бронх</option>
@@ -176,86 +219,74 @@
                         </select>
                     </div>
                     <div class="add-sample__form-group">
+                        <label for="volumeIn">Количество</label>
+                        <input type="number" min="0" class="add-sample__volumeIn" id="volumeIn" name="volumeIn" th:value="*{volumeIn}">
+                    </div>
+                    <div class="add-sample__form-group">
                         <label for="purpose">Назначение образца</label>
-                        <input type="text" class="add-sample__purpose" id="purpose" name="sampleFunc">
+                        <input type="text" class="add-sample__purpose" id="purpose" name="sampleFunc" th:value="*{sampleFunc}">
                     </div>
                     <div class="add-sample__form-group">
                         <label for="disease-history">История болезни</label>
-                        <input type="text" class="add-sample__disease-history" id="disease-history">
+                        <input type="text" class="add-sample__disease-history" id="disease-history" name="caseHistory" th:value="*{caseHistory}">
                     </div>
-                    <div class="add-sample__form-group required">
-                        <label for="region">Населенный пункт</label>
-                        <!--<input type="text" class="add-sample__city" id="city" required>-->
-                        <select class="add-sample__city" id="region" required>
-                            <option selected disabled></option>
-                            <option th:each="region : ${regions}" th:value="${region.getRegionUNID()}" th:text="${region.getRegionName()}"></option>
-                        </select>
-                    </div>
+
                     <div class="add-sample__form-group required">
                         <label for="provider">Поставщик образца</label>
-                        <select class="add-sample__provider" id="provider" required>
+                        <select class="add-sample__provider" id="provider" name="providerId" th:value="*{providerId}" required>
                             <option selected disabled></option>
                             <option th:each="provider : ${providers}" th:value="${provider.getId()}" th:text="${provider.getProviderName()}"></option>
                         </select>
                     </div>
-                    <!-- <div class="add-sample__form-group">
-                        <label for="contact-person">Контактное лицо</label>
-                        <input type="text" class="add-sample__contact-person" id="contact-person">
-                    </div>
-                    <div class="add-sample__form-group">
-                        <label for="contact-person">Контакты</label>
-                        <input type="text" class="add-sample__contact-person" id="contact-person">
-                    </div> -->
                 </div>
                 <div class="add-sample__right-block">
                     <div class="add-sample__form-group required">
                         <label for="season">Сезон</label>
-                        <input type="text" class="add-sample__season" id="season" th:placeholder="${season}" th:value="${season}" required>
-                    </div>
-                    <div class="add-sample__form-group required">
+                        <input type="text" class="add-sample__season" id="season" th:placeholder="${season}"
+                               th:value="${season}" name="season" th:field="*{season}" required>
+
                         <label for="lab-num">Лабораторный номер</label>
-                        <input type="text" class="add-sample__lab-num" id="lab-num" required>
+                        <input type="text" class="add-sample__lab-num" id="lab-num" name="labNum" th:value="*{labNum}" required>
                     </div>
                     <div class="add-sample__form-group required">
                         <label for="project">Проект</label>
-                        <!--<input type="text" class="add-sample__project-id"ide="project-id" required>-->
-                        <select class="add-sample__project" id="project" required>
+                        <select class="add-sample__project" id="project" name="projectId" th:value="*{projectId}" required>
                             <option selected disabled></option>
                             <option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
                         </select>
                     </div>
                     <div class="add-sample__form-group">
                         <label for="project-num">Номер по проекту</label>
-                        <input type="text" class="add-sample__project-num" id="project-num">
+                        <input type="text" class="add-sample__project-num" id="project-num" name="numInProject" th:value="*{numInProject}">
                     </div>
                     <div class="add-sample__form-group">
                         <label for="project-add-num">Дополнительный номер</label>
-                        <input type="text" class="add-sample__project-add-num" id="project-add-num">
+                        <input type="text" class="add-sample__project-add-num" id="project-add-num" name="externalNum" th:value="*{externalNum}">
                     </div>
                     <div class="add-sample__form-group">
                         <label for="notes">Особые примечания</label>
-                        <textarea id="notes"></textarea>
+                        <textarea id="notes" name="notes" th:value="*{notes}"></textarea>
                     </div>
                     <div class="add-sample__criteria">
                         <p class="add-sample__criteria-title">Критерии принятия образца</p>
                         <div class="add-sample__form-group">
-                            <input type="checkbox" class="add-sample__container-is-propered" id="container-is-propered" required>
+                            <input type="checkbox" class="add-sample__container-is-propered" id="container-is-propered" name="isPropered" th:value="*{isPropered}" required>
                             <label for="container-is-propered">Контейнер надлежащего типа</label>
                         </div>
                         <div class="add-sample__form-group">
-                            <input type="checkbox" class="add-sample__container-is-marked" id="container-is-marked" required>
+                            <input type="checkbox" class="add-sample__container-is-marked" id="container-is-marked" name="isMarked" th:value="*{isMarked}" required>
                             <label for="container-is-marked">Контейнер маркирован</label>
                         </div>
                         <div class="add-sample__form-group">
-                            <input type="checkbox" class="add-sample__mark-direction-equals" id="mark-direction-equals" required>
+                            <input type="checkbox" class="add-sample__mark-direction-equals" id="mark-direction-equals" name="markDirectionEquals" th:value="*{markDirectionEquals}" required>
                             <label for="mark-direction-equals">Маркировка на контейнере и направление совпадают</label>
                         </div>
                         <div class="add-sample__form-group">
-                            <input type="checkbox" class="add-sample__contamination" id="contamination" required>
+                            <input type="checkbox" class="add-sample__contamination" id="contamination" name="contamination" th:value="*{contamination}" required>
                             <label for="contamination">Признаков контаминации нет</label>
                         </div>
                         <div class="add-sample__form-group">
-                            <input type="checkbox" class="add-sample__enough-quantity" id="enough-quantity" required>
+                            <input type="checkbox" class="add-sample__enough-quantity" id="enough-quantity" name="isEnough" th:value="*{isEnough}" required>
                             <label for="enough-quantity">Количество образца достаточно для исследования</label>
                         </div>
                     </div>

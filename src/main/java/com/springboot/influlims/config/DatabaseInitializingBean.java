@@ -1,20 +1,20 @@
 package com.springboot.influlims.config;
 
-import com.springboot.influlims.dao.RegionDao;
-import com.springboot.influlims.dao.RoleDao;
-import com.springboot.influlims.dao.UserDao;
-import com.springboot.influlims.entity.RegionEntity;
-import com.springboot.influlims.entity.RoleEntity;
-import com.springboot.influlims.entity.UserEntity;
-import com.springboot.influlims.entity.UserRoleEntity;
+import com.springboot.influlims.dao.*;
+import com.springboot.influlims.entity.*;
 import com.springboot.influlims.entity.enums.Role;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
+
 @Component
 public class DatabaseInitializingBean implements InitializingBean {
+
+//	private static final int N = 0;
 
 	@Autowired
 	RoleDao roleDao;
@@ -26,7 +26,26 @@ public class DatabaseInitializingBean implements InitializingBean {
 	UserDao userDao;
 
 	@Autowired
+	ProjectDao projectDao;
+
+	@Autowired
+	ProviderDao providerDao;
+
+	@Autowired
+	ProviderProjectDao providerProjectDao;
+
+	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	private ProjectEntity setProject(UserEntity userEntity) {
+		ProjectEntity projectEntity = new ProjectEntity(new Random().nextInt() + " project " + System.currentTimeMillis(), userEntity);
+		return projectDao.save(projectEntity);
+	}
+
+	private ProviderEntity setProvider(UserEntity userEntity, RegionEntity regionEntity) {
+		ProviderEntity providerEntity = new ProviderEntity(new Random().nextInt() + " provider " + System.currentTimeMillis(), userEntity, regionEntity);
+		return providerDao.save(providerEntity);
+	}
 
 	private void setRegions() {
 		String regionNames[] = new String[]{"Республика Адыгея", "Республика Башкортостан", "Республика Бурятия", "Республика Алтай", "Республика Дагестан", "Республика Ингушетия", "Кабардино-Балкарская Республика", "Республика Калмыкия", "Республика Карачаево - Черкесия", "Республика Карелия", "Республика Коми", "Республика Марий Эл", "Республика Мордовия", "Республика Саха(Якутия)", "Республика Северная Осетия - Алания","Республика Татарстан", "Республика Тыва", "Удмуртская Республика", "Республика Хакасия", "Чеченская республика", "Чувашская Республика", "Алтайский край", "Краснодарский край", "Красноярский край", "Приморский край", "Ставропольский край", "Хабаровский край", "Амурская область", "Архангельская область", "Астраханская область", "Белгородская область", "Брянская область", "Владимирская область", "Волгоградская область", "Вологодская область", "Воронежская область", "Ивановская область", "Иркутская область", "Калининградская область", "Калужская область", "Камчатский край", "Кемеровская область", "Кировская область", "Костромская область", "Курганская область", "Курская область", "Ленинградская область", "Липецкая область", "Магаданская область", "Московская область", "Мурманская область", "Нижегородская область", "Новгородская область", "Новосибирская область", "Омская область", "Оренбургская область", "Орловская область", "Пензенская область", "Пермский край", "Псковская область", "Ростовская область", "Рязанская область", "Самарская область", "Саратовская область", "Сахалинская область", "Свердловская область", "Смоленская область", "Тамбовская область", "Тверская область", "Томская область", "Тульская область", "Тюменская область", "Ульяновская область", "Челябинская область", "Забайкальский край", "Ярославская область", "Москва", "Санкт-Петербург", "Еврейская автономная область", "Ненецкий автономный округ", "Ханты-Мансийский автономный округ - Югра", "Чукотский автономный округ", "Ямало-Ненецкий автономный округ", "Республика Крым", "Севастополь", "Чеченская Республика"};
@@ -52,5 +71,13 @@ public class DatabaseInitializingBean implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		setRoles();
 		setRegions();
+		if(providerProjectDao.count() == 0) {
+			UserEntity userEntity = userDao.findByLogin(Role.ROLE_SUPERADMIN.name());
+			RegionEntity regionEntity = regionDao.findByRegionUNID(78);
+			ProjectEntity projectEntity = setProject(userEntity);
+			ProviderEntity providerEntity = setProvider(userEntity, regionEntity);
+			providerProjectDao.save(new ProviderProjectEntity(userEntity, providerEntity, projectEntity));
+		}
+
 	}
 }

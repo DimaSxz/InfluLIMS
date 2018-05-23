@@ -12,7 +12,7 @@ public class ProjectEntity extends UserDependentEntity {
 
 	private static final long serialVersionUID = -6798287871869830309L;
 
-	public ProjectEntity() {}
+	ProjectEntity() {}
 
 	public ProjectEntity(String projectName, UserEntity userEntity) {
 		super(userEntity.getId());

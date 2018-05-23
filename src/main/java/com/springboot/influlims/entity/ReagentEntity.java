@@ -12,7 +12,7 @@ public class ReagentEntity extends UserDependentEntity {
 
 	private static final long serialVersionUID = -4288947915279817959L;
 
-	public ReagentEntity() {}
+	ReagentEntity() {}
 
 	public ReagentEntity(UserEntity userEntity, ReagentTypeEntity reagentTypeEntity, String kitLot, Long maxResource) {
 		super(userEntity.getId());
