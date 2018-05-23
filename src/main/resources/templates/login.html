@@ -6,25 +6,19 @@
     <div class="login-socials-wrapper">
         <div class="popup">
             <div class="popup-content">
-                <form class="login-form auth-form" @submit="checkForm" method="post" novalidate="true">
+                <form class="login-form auth-form" ref="form" v-on:submit.prevent="checkForm" method="post" novalidate="true">
                     <div class="login-form__title">
                         Добро пожаловать! <div class="login-form__icon"><i class="far fa-user"></i></div>
                     </div>
-                    <!--<div class="login-form__form-group" :class="{ error : hasError }" v-on:input="inputForm">-->
-                        <!--<label for="login">Логин</label>-->
-                        <!--<input type="text" class="login-form__form-control" name="login" v-model="login">-->
-                    <!--</div>-->
-                    <div class="login-form__form-group" >
+                    <div class="login-form__form-group" :class="{ error : hasLoginError }" v-on:input="inputForm">
                         <label for="login">Логин</label>
-                        <input type="text" class="login-form__form-control" name="login">
+                        <input type="text" class="login-form__form-control" name="login" v-model="login">
+                        <div class="error login-form__error-message" v-if="loginError != null">{{ loginError }}</div>
                     </div>
-                    <!--<div class="login-form__form-group" :class="{ error : hasError }">-->
-                        <!--<label for="password">Пароль</label>-->
-                        <!--<input type="password" class="login-form__form-control" name="password" v-model="password" v-on:input="inputForm">-->
-                    <!--</div>-->
-                    <div class="login-form__form-group">
+                    <div class="login-form__form-group" :class="{ error : hasPasswordError }">
                         <label for="password">Пароль</label>
-                        <input type="password" class="login-form__form-control" name="password">
+                        <input type="password" class="login-form__form-control" name="password" v-model="password" v-on:input="inputForm">
+                        <div class="error login-form__error-message" v-if="passwordError != null">{{ passwordError }}</div>
                     </div>
                     <button type="submit" class="btn btn-login">Войти</button>
                     <!-- <button type="button" class="btn btn-get-access" data-balloon="Запросите доступ к личному кабинету у администратора" data-balloon-pos="right">
