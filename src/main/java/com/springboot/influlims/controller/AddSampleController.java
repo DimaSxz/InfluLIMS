@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Calendar;
@@ -50,7 +48,8 @@ public class AddSampleController {
 	@Autowired
 	private Helper helper;
 
-	@RequestMapping(method = RequestMethod.GET)
+//	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String addSample(ModelMap model, String success) {
 		if(success != null) model.addAttribute("addSuccess", "Sample successfully added!");
 		model.addAttribute("season", helper.getSeason());
@@ -62,7 +61,8 @@ public class AddSampleController {
 	}
 
 	//		TODO validate
-	@RequestMapping(method = RequestMethod.POST)
+//	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public String addSample(@ModelAttribute("addSampleForm") AddSampleForm addSampleForm, BindingResult bindingResult, Model model, Principal principal) {
 
 		UserEntity userEntity = userDao.findByLogin(principal.getName());

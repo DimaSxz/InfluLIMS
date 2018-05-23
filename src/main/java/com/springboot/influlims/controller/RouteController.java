@@ -43,11 +43,7 @@ public class RouteController {
 		return "admin/reagents";
 	}
 
-	@RequestMapping(value = "/add-extraction", method = RequestMethod.GET)
-	public String addExtraction(Model model) {
-		model.addAttribute("season", helper.getSeason());
-		return "add-extraction";
-	}
+
 
 	@RequestMapping(value = "/add-pcr", method = RequestMethod.GET)
 	public String addPcr(Model model) {

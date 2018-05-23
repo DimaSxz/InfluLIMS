@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,7 +21,8 @@ public class LoginController {
 	@Autowired
 	private Helper helper;
 
-	@RequestMapping(method = RequestMethod.GET)
+//	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String login(Model model, String error, String logout, HttpServletRequest request) {
 
 		String checkAuthorisation = helper.checkAuth(request);
@@ -34,6 +37,11 @@ public class LoginController {
 		}
 
 		return "login";
+	}
+
+	@PostMapping
+	public String login() {
+		return null;
 	}
 
 }
