@@ -1,6 +1,7 @@
 package com.springboot.influlims.controller;
 
 import com.springboot.influlims.entity.UserEntity;
+import com.springboot.influlims.service.SecurityServiceImpl;
 import com.springboot.influlims.service.interfaces.SecurityService;
 import com.springboot.influlims.service.interfaces.UserService;
 import com.springboot.influlims.validator.UserValidator;
@@ -25,7 +26,7 @@ public class RegistrationController {
 	private UserService userService;
 
 	@Autowired
-	private SecurityService securityService;
+	private SecurityServiceImpl securityService;
 
 	@Autowired
 	private UserValidator userValidator;
@@ -59,9 +60,11 @@ public class RegistrationController {
 			return "registration";
 		}
 
+		String unHashedPassword = userForm.getPassword();
+
 		userService.save(userForm);
 
-		securityService.autoLogin(userForm.getLogin(), userForm.getPassword());
+		securityService.autoLogin(userForm.getLogin(), unHashedPassword);
 
 		return "redirect:/main";
 	}

@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class Lesson4Db1Application {
+public class InfluLIMS {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Lesson4Db1Application.class, args);
+		SpringApplication.run(InfluLIMS.class, args);
 	}
 }
