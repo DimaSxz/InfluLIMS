@@ -2,6 +2,17 @@ $(function() {
     $('.date').each(function() {
         $(this).datepicker();
     });
+
+    $('.accordion, .add-extraction__filter .btn').on('click', function(e) {
+        if (e.target.id.indexOf('extraction-') != -1)
+            return;
+
+        if (!$(this).hasClass('active')) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    });
 });
 
 const auth = new Vue ({
@@ -138,10 +149,7 @@ const socials = new Vue ({
     data: {
         socials: [
             {className: 'vk', faClassName: 'vk'},
-            {className: 'ok', faClassName: 'odnoklassniki'},
-            {className: 'fb', faClassName: 'facebook'},
-            {className: 'g-plus', faClassName: 'google-plus-g'},
-            {className: 'yandex', faClassName: 'yandex'}
+            {className: 'ok', faClassName: 'odnoklassniki'}
         ]
     }
 });

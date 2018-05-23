@@ -1,5 +1,7 @@
 package com.springboot.influlims.controller;
 
+import com.springboot.influlims.service.Helper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +16,13 @@ public class LoginController {
 
 	private static final String host = "localhost:8080/";
 
-	private String checkAuth(HttpServletRequest request) {
-		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			String redirect = request.getHeader("referer");
-			if(redirect != null && redirect.startsWith(host)) return "redirect:" + redirect;
-			return "redirect:/main";
-		}
-		return null;
-	}
+	@Autowired
+	private Helper helper;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(Model model, String error, String logout, HttpServletRequest request) {
 
-		String checkAuthorisation = checkAuth(request);
+		String checkAuthorisation = helper.checkAuth(request);
 		if(checkAuthorisation != null) return checkAuthorisation;
 
 		if (error != null) {

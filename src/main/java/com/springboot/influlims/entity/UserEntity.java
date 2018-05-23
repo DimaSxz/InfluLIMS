@@ -16,10 +16,7 @@ public class UserEntity extends BasicEntity {
 
 	public UserEntity() {}
 
-//	public UserEntity(AccessEntity accessEntity, String login, String password) {
 	public UserEntity(String login, String password) {
-//		this.accessEntity = accessEntity;
-//		this.accessId = accessEntity.getId();
 		this.login = login;
 		this.password = password;
 	}
@@ -50,28 +47,6 @@ public class UserEntity extends BasicEntity {
 		this.position = position;
 		this.isTest = isTest;
 	}
-
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(
-//			name = "role_user",
-//			joinColumns = @JoinColumn(
-//					name = "user_id",
-//					nullable = false,
-//					foreignKey = @ForeignKey(
-//							name = "FK_users_role",
-//							foreignKeyDefinition = "FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE RESTRICT ON UPDATE CASCADE"
-//					)
-//			),
-//			inverseJoinColumns = @JoinColumn(
-//					name = "role_id",
-//					nullable = false,
-//					foreignKey = @ForeignKey(
-//							name = "FK_roles_user",
-//							foreignKeyDefinition = "FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE RESTRICT ON UPDATE CASCADE"
-//					)
-//			)
-//	)
-//	public Collection<RoleEntity> roleEntities = new ArrayList<>();
 
 	@OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Collection<SocialEntity> socialEntities = new ArrayList<>();
@@ -112,22 +87,6 @@ public class UserEntity extends BasicEntity {
 	@OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Collection<UserRoleEntity> userRolesEntities = new ArrayList<>();
 
-//	@Basic
-//	@Column(nullable = false, insertable = false, updatable = false, columnDefinition = "INT(11) UNSIGNED")
-//	private Long accessId;
-
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(nullable = false, name = "accessId", foreignKey = @ForeignKey(name = "FK_users_access", foreignKeyDefinition = "FOREIGN KEY (access_id) REFERENCES access(id) ON DELETE RESTRICT ON UPDATE CASCADE"))
-//	private AccessEntity accessEntity;
-
-//	public AccessEntity getAccessEntity() {
-//		return accessEntity;
-//	}
-//
-//	public void setAccessEntity(AccessEntity accessEntity) {
-//		this.accessEntity = accessEntity;
-//	}
-
 	@Basic
 	@Column(nullable = false, length = 128)
 	private String login;
@@ -155,14 +114,6 @@ public class UserEntity extends BasicEntity {
 	@Basic
 	@Column(nullable = false, columnDefinition = "BIT(1) DEFAULT 0")
 	private Boolean isTest = false;
-
-//	public Long getAccessId() {
-//		return accessId;
-//	}
-//
-//	public void setAccessId(Long accessId) {
-//		this.accessId = accessId;
-//	}
 
 	public String getLogin() {
 		return login;
@@ -307,14 +258,6 @@ public class UserEntity extends BasicEntity {
 	public void setUserRolesEntities(Collection<UserRoleEntity> userRolesEntities) {
 		this.userRolesEntities = userRolesEntities;
 	}
-
-	//	public Collection<RoleEntity> getRoleEntities() {
-//		return roleEntities;
-//	}
-//
-//	public void setRoleEntities(Collection<RoleEntity> roleEntities) {
-//		this.roleEntities = roleEntities;
-//	}
 
 	public String getPassword() {
 		return password;

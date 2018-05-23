@@ -308,6 +308,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: #fff;
     align-items: center;
     position: fixed;
     top: 0;
@@ -550,13 +551,21 @@ header {
 .add-sample__block-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     text-align: left;
 }
 
+/*.add-sample__left-block {*/
+    /*margin-right: 5vw;*/
+/*}*/
+
 .add-sample__left-block {
-    margin-right: 5vw;
+    width: 48%;
+}
+
+.add-sample__right-block {
+    width: 50%;
 }
 
 .add-sample__form-group,
@@ -599,7 +608,7 @@ input[type='file'] {
 }
 
 select {
-    width: 17.2vw;
+    width: 15vw;
     height: 4vh;
     background-color: transparent;
 }
@@ -612,6 +621,7 @@ textarea {
 }
 
 .add-sample__criteria {
+    max-width: 28.15vw;
     border: 0.1vw solid rgb(166, 166, 166);
     border-radius: 3px;
     padding: 0 0.5vw;

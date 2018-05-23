@@ -1,6 +1,7 @@
 package com.springboot.influlims.controller;
 
 import com.springboot.influlims.entity.UserEntity;
+import com.springboot.influlims.service.Helper;
 import com.springboot.influlims.service.SecurityServiceImpl;
 import com.springboot.influlims.service.interfaces.SecurityService;
 import com.springboot.influlims.service.interfaces.UserService;
@@ -31,19 +32,22 @@ public class RegistrationController {
 	@Autowired
 	private UserValidator userValidator;
 
-	private String checkAuth(HttpServletRequest request) {
-		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			String redirect = request.getHeader("referer");
-			if(redirect != null && redirect.startsWith(host)) return "redirect:" + redirect;
-			return "redirect:/main";
-		}
-		return null;
-	}
+	@Autowired
+	private Helper helper;
+
+//	private String checkAuth(HttpServletRequest request) {
+//		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+//			String redirect = request.getHeader("referer");
+//			if(redirect != null && redirect.startsWith(host)) return "redirect:" + redirect;
+//			return "redirect:/main";
+//		}
+//		return null;
+//	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String registration(Model model, HttpServletRequest request) {
 
-		String checkAuthorisation = checkAuth(request);
+		String checkAuthorisation = helper.checkAuth(request);
 		if(checkAuthorisation != null) return checkAuthorisation;
 
 		model.addAttribute("userForm", new UserEntity());
