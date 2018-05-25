@@ -15,8 +15,6 @@ public class Helper {
 
 	private static final String host = "localhost:8080/";
 
-
-
 	public Collection<? extends GrantedAuthority> getRoles() {
 		return SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 	}

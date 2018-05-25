@@ -17,8 +17,9 @@ public class PatientEntity extends RegionUserDependentEntity {
 
 	PatientEntity() {}
 
-	public PatientEntity(Short patientAge, Gender patientGender, UserEntity userEntity, RegionEntity regionEntity) {
+	public PatientEntity(Vaccine isVaccinated, Short patientAge, Gender patientGender, UserEntity userEntity, RegionEntity regionEntity) {
 		super(userEntity.getId(), regionEntity.getRegionUNID());
+		this.isVaccinated = isVaccinated;
 		this.patientAge = patientAge;
 		this.patientGender = patientGender;
 		this.userEntity = userEntity;

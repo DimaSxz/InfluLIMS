@@ -140,10 +140,10 @@
     </div>
 </header>
     <div class="content add-extraction" th:if="${samples != null}">
-        <form action="">
+        <form method="post" enctype="multipart/form-data" action="#" th:action="@{/add-extraction}" th:object="${addExtractionForm}">
             <div class="add-extraction__left-block">
                 <div class="accordion" th:each="sample : ${samples}">
-                    <input type="checkbox" class="accordion-control" th:id="${sample.getId()}" th:value="${sample.getId()}" name="samples[]">
+                    <input type="checkbox" class="accordion-control" th:id="${sample.getId()}" th:value="${sample.getId()}" name="samples">
                     <label th:for="${sample.getId()}" th:text="'Образец №' + ${sample.getLabNum()}"></label>
                     <div class="accordion-desc">
                         <p th:text="${sample.getNotes()}"></p>
@@ -151,50 +151,49 @@
                 </div>
             </div>
             <div class="add-extraction__right-block">
-                <div class="add-extraction__filter">
-                    <p class="add-extraction__filter-title">Фильтр образцов</p>
-                    <div class="add-extraction__filter-content">
-                        <button type="button" class="btn add-extraction__filter-option">№ образца</button>
-                        <button type="button" class="btn add-extraction__filter-option">Поставщик</button>
-                        <button type="button" class="btn add-extraction__filter-option">Проект</button>
-                        <button type="button" class="btn add-extraction__filter-option">№ набора</button>
-                        <button type="button" class="btn add-extraction__filter-option">Дата взятия образца</button>
-                        <button type="button" class="btn add-extraction__filter-option">Сезон</button>
-                    </div>
-                </div>
-                <form action="">
+                <!--<div class="add-extraction__filter">-->
+                    <!--<p class="add-extraction__filter-title">Фильтр образцов</p>-->
+                    <!--<div class="add-extraction__filter-content">-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">№ образца</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Поставщик</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Проект</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">№ набора</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Дата взятия образца</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Сезон</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<form action="">-->
                     <div class="add-extraction__form-group required">
                         <label for="protocol-name">Название протокола</label>
-                        <input type="text" class="add-sample__protocol-name" id="protocol-name" required>
+                        <input type="text" class="add-sample__protocol-name" id="protocol-name" name="extractionName" th:value="*{extractionName}" required>
                     </div>
-                    <div class="add-extraction__form-group required">
-                        <label for="reagent-set">Набор реагентов</label>
-                        <input type="text" class="add-sample__reagent-set" id="reagent-set" required>
-                    </div>
-                    <div class="add-extraction__form-group">
-                        <label for="serial-set-num">Серийный номер набора</label>
-                        <input type="text" class="add-sample__serial-set-num" id="serial-set-num">
-                    </div>
+                <div class="add-extraction__form-group required">
+                    <label for="reagent-set">Набор реагентов</label>
+                    <select class="add-sample__reagent-set" id="reagent-set" name="reagentId" th:value="*{reagentId}" required>
+                        <option selected disabled></option>
+                        <option th:each="reagent : ${reagents}" th:value="${reagent.getId()}" th:text="${reagent.getReagentTypeEntity().getReagentName()} + '#' +  ${reagent.getKitLot()}"></option>
+                    </select>
+                </div>
                     <div class="add-extraction__form-group required">
                         <label for="enter-amount">Объем материала на входе</label>
-                        <input type="text" class="add-sample__enter-amount" id="enter-amount" required>
+                        <input type="text" class="add-sample__enter-amount" id="enter-amount" name="volumeIn" th:value="*{volumeIn}" required>
                     </div>
                     <div class="add-extraction__form-group required">
                         <label for="exit-amount">Объем материала на выходе</label>
-                        <input type="text" class="add-sample__exit-amount" id="exit-amount" required>
+                        <input type="text" class="add-sample__exit-amount" id="exit-amount" name="volumeOut" th:value="*{volumeOut}" required>
                     </div>
-                    <!--<div class="add-extraction__form-group">-->
-                        <!--<label for="extraction-protocol">Протокол экстракции</label>-->
-                        <!--<input type="file" class="add-sample__extraction-protocol" id="extraction-protocol">-->
-                    <!--</div>-->
                     <div class="add-extraction__form-group">
+                        <label for="extraction-protocol">Протокол экстракции</label>
+                        <input type="file" class="add-sample__extraction-protocol" id="extraction-protocol" name="extractionFile" th:value="*{extractionFile}">
+                    </div>
+                    <div class="add-extraction__form-group required">
                         <label for="pcr-date">Время проведения</label>
-                        <input type="text" class="add-sample__pcr-date date" id="pcr-date" required>
+                        <input type="text" class="add-sample__pcr-date date" id="pcr-date" name="extractionDate" th:value="*{extractionDate}" required>
                     </div>
                     <button type="submit" class="btn btn-add">
                         <i class="fa fa-plus"></i> Добавить
                     </button>
-                </form>
+                <!--</form>-->
             </div>
         </form>
     </div>

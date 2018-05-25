@@ -2,13 +2,19 @@ package com.springboot.influlims.config;
 
 import com.springboot.influlims.dao.*;
 import com.springboot.influlims.entity.*;
+import com.springboot.influlims.entity.enums.Gender;
 import com.springboot.influlims.entity.enums.Role;
+import com.springboot.influlims.entity.enums.Vaccine;
+import com.springboot.influlims.service.Helper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
 
 @Component
@@ -33,6 +39,21 @@ public class DatabaseInitializingBean implements InitializingBean {
 
 	@Autowired
 	ProviderProjectDao providerProjectDao;
+
+	@Autowired
+	ReagentTypeDao reagentTypeDao;
+
+	@Autowired
+	ReagentDao reagentDao;
+
+	@Autowired
+	PatientDao patientDao;
+
+	@Autowired
+	SampleDao sampleDao;
+
+	@Autowired
+	Helper helper;
 
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -71,13 +92,30 @@ public class DatabaseInitializingBean implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		setRoles();
 		setRegions();
-		if(providerProjectDao.count() == 0) {
-			UserEntity userEntity = userDao.findByLogin(Role.ROLE_SUPERADMIN.name());
+		UserEntity userEntity = userDao.findByLogin(Role.ROLE_SUPERADMIN.name());
+		if(providerProjectDao.count() == 0 || patientDao.count() == 0 || sampleDao.count() == 0) {
 			RegionEntity regionEntity = regionDao.findByRegionUNID(78);
 			ProjectEntity projectEntity = setProject(userEntity);
 			ProviderEntity providerEntity = setProvider(userEntity, regionEntity);
-			providerProjectDao.save(new ProviderProjectEntity(userEntity, providerEntity, projectEntity));
+			PatientEntity patientEntity = patientDao.save(new PatientEntity(Vaccine.X, (short) new Random().nextInt(Short.MAX_VALUE / 100), Gender.X, userEntity, regionEntity));
+			ProviderProjectEntity providerProject = providerProjectDao.save(new ProviderProjectEntity(userEntity, providerEntity, projectEntity));
+			sampleDao.save(new SampleEntity(userEntity, patientEntity, providerProject, String.valueOf(new Random().nextLong()), new Random().nextBoolean(), "testType", new Random().nextInt(Short.MAX_VALUE / 100), new Date(), new Date(), new Date(), helper.getSeason()));
+			sampleDao.save(new SampleEntity(userEntity, patientEntity, providerProject, String.valueOf(new Random().nextLong()), new Random().nextBoolean(), "testType2", new Random().nextInt(Short.MAX_VALUE / 100), new Date(), new Date(), new Date(), helper.getSeason()));
 		}
+		if(reagentDao.count() == 0 || reagentTypeDao.count() == 0) {
+			Collection<ReagentTypeEntity> reagentTypeEntities = new HashSet<>();
+			ReagentTypeEntity ext = new ReagentTypeEntity("Реагент для экстракции", userEntity);
+			ReagentTypeEntity pcr = new ReagentTypeEntity("Регент для ПЦР", "Тестовые каналы ПЦР", "Каналы поиска ПЦР", userEntity);
+			reagentTypeEntities.add(ext);
+			reagentTypeEntities.add(pcr);
+			reagentTypeDao.saveAll(reagentTypeEntities);
 
+			Collection<ReagentEntity> reagentEntities = new HashSet<>();
+			reagentEntities.add(new ReagentEntity(userEntity, ext, "#" + System.currentTimeMillis(), 150L));
+			reagentEntities.add(new ReagentEntity(userEntity, ext, "#" + System.currentTimeMillis(), 150L));
+			reagentEntities.add(new ReagentEntity(userEntity, pcr, "#" + System.currentTimeMillis(), 150L));
+			reagentEntities.add(new ReagentEntity(userEntity, pcr, "#" + System.currentTimeMillis(), 150L));
+			reagentDao.saveAll(reagentEntities);
+		}
 	}
 }
