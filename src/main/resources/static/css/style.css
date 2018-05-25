@@ -255,10 +255,11 @@ textarea {
 }
 
 .side-menu__pages-list {
+    overflow: hidden;
     padding-left: 0;
 }
 
-.side-menu__pages-list li {
+.side-menu__pages-list > li {
     font-size: 0.9vw;
     list-style-type: none;
     padding: 2.2vh 0 2.2vh 1.5vw;
@@ -699,6 +700,11 @@ textarea {
     cursor: pointer;
 }
 
+.side-menu__pages-list .accordion {
+    background: transparent;
+    margin-bottom: 0;
+}
+
 .accordion-control {
     margin-left: 1vw;
 }
@@ -720,12 +726,38 @@ textarea {
     transition: max-height .35s;
 }
 
+.accordion__submenu {
+    width: calc(100% - 1.5vw);
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 0;
+    -webkit-transition: max-height .35s;
+    -o-transition: max-height .35s;
+    transition: max-height .35s;
+}
+
+.accordion__submenu li {
+    padding: 1rem 1.3rem;
+    list-style-type: none;
+    font-size: 0.9vw;
+    color: #fff;
+    cursor: pointer;
+}
+
+.accordion__submenu li:first-child {
+    padding-top: 2rem;
+}
+
 .accordion-desc p {
     margin: 1.5vh;
 }
 
 .accordion.active .accordion-desc {
     max-height: 25vh;
+}
+
+.accordion.active .accordion__submenu {
+    max-height: 14rem;
 }
 
 .accordion label::after {
@@ -976,6 +1008,45 @@ textarea {
     background-image: url(../images/eclipse.svg);
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+.providers-projects__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.providers-projects__form-providers,
+.providers-projects__form-projects {
+    width: 30%;
+    margin-right: 5rem;
+}
+
+.providers-projects__form-projects {
+    width: 40%;
+}
+
+.providers-projects__form-providers select,
+.providers-projects__form-projects select {
+    width: 100%;
+    height: 3rem;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+}
+
+.providers-projects__form-projects select {
+    height: 15rem;
+}
+
+.providers-projects__form .btn {
+    width: 10rem;
+    margin-left: 0;
+}
+
+.providers-projects__form .btn-remove {
+    background-color: red;
 }
 
 @media all and (max-width: 1600px) {

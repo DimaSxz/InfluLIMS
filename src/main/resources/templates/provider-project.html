@@ -1,0 +1,32 @@
+<div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+    <div class="content providers-projects">
+        <form action="" class="providers-projects__form">
+            <div class="form-group providers-projects__form-providers">
+                <p>Выберите поставщика</p>
+                <select name="providers">
+                    <option value="0">Идиот</option>
+                    <option value="1">Кретин</option>
+                    <option value="2">ДЦПшник</option>
+                    <option value="3">Даун</option>
+                    <option value="4">Овощ</option>
+                    <option value="5">Имбицил-романтик</option>
+                </select>
+            </div>
+            <div class="form-group providers-projects__form-projects">
+                <p>Выберите проекты</p>
+                <select name="projects" multiple>
+                    <option value="0" selected>Дебил</option>
+                    <option value="1">Бомж</option>
+                    <option value="2" selected>Клоун</option>
+                    <option value="3">Лох</option>
+                    <option value="4">Фееричный долбоеб</option>
+                </select>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-add">
+                    <i class="fa fa-plus"></i> Сохранить
+                </button>
+            </div>
+        </form>
+    </div>
+<div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
