@@ -7,6 +7,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +30,25 @@ public class FileStorageService {
 
 	@Value("${upload.pcr.report.location}")
 	private String pcrReportPath;
+
+	@PostConstruct
+	private void init() {
+		String path = servletContext.getRealPath("/");
+		System.out.println("CONTEXT_REAL_PATH: " + path);
+		File ex = new File(path + extractionPath);
+		File pcrProto = new File(path + pcrProtocolPath);
+		File pcrRepo = new File(path + pcrReportPath);
+//		File ex = new File(servletContext.getRealPath(extractionPath));
+//		File pcrProto = new File(servletContext.getRealPath(pcrProtocolPath));
+//		File pcrRepo = new File(servletContext.getRealPath(pcrReportPath));
+
+		if(!ex.exists())
+			ex.mkdirs();
+		if(!pcrProto.exists())
+			pcrProto.mkdirs();
+		if(!pcrRepo.exists())
+			pcrRepo.mkdirs();
+	}
 
 	public MultipartFile getExtractionFile(String fileName) {
 		return getFile(extractionPath, fileName);
@@ -58,21 +78,21 @@ public class FileStorageService {
 
 	public String saveExtractionFile(MultipartFile file) {
 		DateFormat dateFormat = new SimpleDateFormat("ddMMYYYYhhmmss");
-		String fileName = dateFormat.format(System.currentTimeMillis()) + "EXT." + FilenameUtils.getExtension(file.getOriginalFilename());
+		String fileName = dateFormat.format(System.currentTimeMillis()) + "-EXTRACTION." + FilenameUtils.getExtension(file.getOriginalFilename());
 		saveFile(file, extractionPath, fileName);
 		return fileName;
 	}
 
 	public String savePcrProtocolFile(MultipartFile file) {
 		DateFormat dateFormat = new SimpleDateFormat("ddMMYYYYhhmmss");
-		String fileName = dateFormat.format(System.currentTimeMillis()) + "EXT." + FilenameUtils.getExtension(file.getOriginalFilename());
+		String fileName = dateFormat.format(System.currentTimeMillis()) + "-PCR_PROTOCOL." + FilenameUtils.getExtension(file.getOriginalFilename());
 		saveFile(file, pcrProtocolPath, fileName);
 		return fileName;
 	}
 
 	public String savePcrReportFile(MultipartFile file) {
 		DateFormat dateFormat = new SimpleDateFormat("ddMMYYYYhhmmss");
-		String fileName = dateFormat.format(System.currentTimeMillis()) + "EXT." + FilenameUtils.getExtension(file.getOriginalFilename());
+		String fileName = dateFormat.format(System.currentTimeMillis()) + "-PCR_REPORT." + FilenameUtils.getExtension(file.getOriginalFilename());
 		saveFile(file, pcrReportPath, fileName);
 		return fileName;
 	}
@@ -80,10 +100,6 @@ public class FileStorageService {
 	private void saveFile(MultipartFile file, String basePath, String fileName) {
 		try {
 			String path = servletContext.getRealPath(basePath);
-			File dirPath = new File(path);
-			if(!dirPath.exists()) {
-				if(!dirPath.mkdirs()) throw new IOException("mkdir returns error, can't create dir: " + path);
-			}
 			file.transferTo(new File(path + fileName));
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

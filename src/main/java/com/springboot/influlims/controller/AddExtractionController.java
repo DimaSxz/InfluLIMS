@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collection;
@@ -59,7 +58,9 @@ public class AddExtractionController {
 	}
 
 	@PostMapping
-	public String addExtraction(@ModelAttribute("addExtractionForm") AddExtractionForm addExtractionForm, BindingResult bindingResult, Model model, Principal principal, HttpServletRequest request) {
+	public String addExtraction(@ModelAttribute("addExtractionForm") AddExtractionForm addExtractionForm, BindingResult bindingResult, Model model, Principal principal) {
+
+		UserEntity userEntity = userDao.findByLogin(principal.getName());
 
 		String fileName = null;
 		MultipartFile file = addExtractionForm.getExtractionFile();
@@ -67,14 +68,12 @@ public class AddExtractionController {
 			fileName = fileStorageService.saveExtractionFile(file);
 		}
 
-		UserEntity userEntity = userDao.findByLogin(principal.getName());
 
 		ReagentEntity reagentEntity = reagentDao.getOne(addExtractionForm.getReagentId());
 
 //		TODO Validate if(result < 0)
 		Long remain = reagentEntity.getRemainResource() != null ? reagentEntity.getRemainResource() : reagentEntity.getMaxResource();
 		remain -= addExtractionForm.getSamples().length;
-
 		reagentEntity.setRemainResource(remain);
 		reagentDao.save(reagentEntity);
 
@@ -86,7 +85,7 @@ public class AddExtractionController {
 		}
 		extractionDao.saveAll(extractionEntities);
 
-		return "add-extraction";
+		return "redirect:/add-extraction?success";
 	}
 
 }
