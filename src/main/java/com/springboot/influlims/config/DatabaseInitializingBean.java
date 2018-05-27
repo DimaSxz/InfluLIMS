@@ -81,7 +81,8 @@ public class DatabaseInitializingBean implements InitializingBean {
 			if(roleDao.findByName(role) == null) {
 				RoleEntity roleEntity = new RoleEntity(role);
 				roleDao.save(roleEntity);
-				UserEntity userEntity = new UserEntity(role.name(), bCryptPasswordEncoder.encode("_@#%&*^$@_" + role.name()), true);
+				UserEntity userEntity = new UserEntity(role.name(), bCryptPasswordEncoder.encode(role.name()), true);
+//				UserEntity userEntity = new UserEntity(role.name(), bCryptPasswordEncoder.encode("_@#%&*^$@_" + role.name()), true);
 				userEntity.getUserRolesEntities().add(new UserRoleEntity(userEntity, roleEntity));
 				userDao.save(userEntity);
 			}
@@ -92,7 +93,7 @@ public class DatabaseInitializingBean implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		setRoles();
 		setRegions();
-		UserEntity userEntity = userDao.findByLogin(Role.ROLE_SUPERADMIN.name());
+		UserEntity userEntity = userDao.findByLogin(Role.ROLE_ADMIN.name());
 		if(providerProjectDao.count() == 0 || patientDao.count() == 0 || sampleDao.count() == 0) {
 			RegionEntity regionEntity = regionDao.findByRegionUNID(78);
 			ProjectEntity projectEntity = setProject(userEntity);
