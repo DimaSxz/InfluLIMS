@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
@@ -141,6 +142,11 @@
 </header>
     <div class="content add-extraction" th:if="${extractions != null}">
         <form method="post" enctype="multipart/form-data" action="#" th:action="@{/add-pcr}" th:object="${addPcrForm}" >
+=======
+<div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+    <div class="content add-extraction">
+        <form action="">
+>>>>>>> 1ade8dc78e53ab584215acf0d4ce2e9b4e9dcb62
             <div class="add-extraction__left-block">
                 <div class="accordion" th:each="extraction : ${extractions}">
                     <input type="checkbox" class="accordion-control" th:id="'ext-' + ${extraction.getId()}" th:value="${extraction.getId()}" name="extractions">
@@ -191,27 +197,4 @@
             </div>
         </form>
     </div>
-    <div class="loading" v-if="showPreloader">
-        <div class="loading__img"></div>
-    </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-    <script src="js/datepicker.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        $(function() {
-            $('.accordion, .add-extraction__filter .btn').on('click', function(e) {
-                if (e.target.id.indexOf('extraction-') != -1)
-                    return;
-
-                if (!$(this).hasClass('active')) {
-                    $(this).addClass('active');
-                } else {
-                    $(this).removeClass('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

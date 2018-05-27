@@ -1,144 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/balloon.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<input type="checkbox" id="side-menu-toggle" class="side-menu-toggle">
-<label for="side-menu-toggle" class="side-menu-icon">
-    <i class="fa fa-bars"></i>
-</label>
-<aside class="side-menu">
-    <a href="/" class="logo logo-menu"></a>
-    <div class="side-menu__season">
-        Текущий сезон: <span th:text="${season}"></span>
-    </div>
-    <ul class="side-menu__pages-list">
-        <li class="active" onclick="location.href='/main'">
-                <span class="side-menu__icon-container">
-                    <i class="fas fa-newspaper"></i>
-                </span>
-            Новости
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_USERS_TEST', 'ROLE_MANAGE_USERS_NOTEST', 'ROLE_MANAGE_USERS_ALL')" onclick="location.href='/manage-users'">
-                <span class="side-menu__icon-container">
-                    <i class="fas fa-users"></i>
-                </span>
-            Пользователи
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROVIDERS_TEST', 'ROLE_MANAGE_PROVIDERS_NOTEST', 'ROLE_MANAGE_PROVIDERS_ALL', 'ROLE_MANAGE_PROVIDERS_SELF')" onclick="location.href='/manage-providers'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-truck"></i>
-                </span>
-            Поставщики
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROJECTS_SELF', 'ROLE_MANAGE_PROJECTS_TEST', 'ROLE_MANAGE_PROJECTS_NOTEST', 'ROLE_MANAGE_PROJECTS_ALL')" onclick="location.href='/manage-projects'">
-                <span class="side-menu__icon-container">
-                    <!--<i class="fas fa-user-secret"></i>-->
-                    <i class="fa fa-list-alt"></i>
-                </span>
-            Проекты
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_REAGENTS_SELF', 'ROLE_MANAGE_REAGENTS_TEST', 'ROLE_MANAGE_REAGENTS_NOTEST', 'ROLE_MANAGE_REAGENTS_ALL')" onclick="location.href='/manage-projects'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-flask"></i>
-                </span>
-            Реагенты
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_SAMPLE')" onclick="location.href='/add-sample'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-plus"></i>
-                </span>
-            Регистрация образца
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_EXTRACTION')" onclick="location.href='/add-extraction'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-indent"></i>
-                </span>
-            Экстракция
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_PCR')" onclick="location.href='/add-pcr'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-spinner"></i>
-                </span>
-            ПЦР
-        </li>
-        <li onclick="location.href='/samples'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-info"></i>
-                </span>
-            Информация об образцах
-        </li>
-        <li onclick="location.href='/logout'">
-                <span class="side-menu__icon-container">
-                    <i class="fa fa-sign-out-alt"></i>
-                </span>
-            Выход
-        </li>
-    </ul>
-</aside>
-<header class="header">
-    <h3 class="header__title">Новости</h3>
-    <div class="header__panel">
-        <div class="header__user-info">
-            <img class="header__avatar" src="images/ivanov.jpg">
-            <span sec:authentication="name" class="header__name"></span> | <span sec:authentication="principal.authorities"></span>
-        </div>
-        <div class="header__notify">
-                <span class="header__notify-wrapper" @click="show = !show">
-                    <span class="header__notify-icon">
-                        <i class="far fa-bell"></i>
-                    </span>
-                    <span class="header__notify-quantity" v-if="alertCount > 0">{{ alertCount }}</span>
-                </span>
-            <transition name="fade">
-                <div class="header__notify-content" v-if="show">
-                    <div class="header__alert">
-                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                        <span class="header__alert-close" @click="alertClose">
-                                <i class="fa fa-times"></i>
-                            </span>
-                    </div>
-                    <div class="header__alert" @click="alertClose">
-                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                        <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                    </div>
-                    <div class="header__alert" @click="alertClose">
-                        <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                        <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                    </div>
-                </div>
-            </transition>
-        </div>
-        <div class="header__search">
-            <form class="header__search-form">
-                <input type="text" class="header__search-input" placeholder="Поиск..." v-on:click="activeSearch = !activeSearch">
-                <span class="icon">
-                        <i class="fas fa-search"></i>
-                    </span>
-            </form>
-            <div class="header__search-content" v-if="activeSearch">
-                <div class="header__search-elem">
-                    <p>Образец №1</p>
-                </div>
-                <div class="header__search-elem">
-                    <p>Образец №2</p>
-                </div>
-                <div class="header__search-elem">
-                    <p>Образец №3</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
     <div class="content add-sample">
         <form action="#" th:action="@{/add-sample}" th:object="${addSampleForm}" method="post">
             <div class="add-sample__block-wrapper">
@@ -182,6 +42,10 @@
                             <option value="N">Нет</option>
                         </select>
                     </div>
+                    <div class="add-sample__form-group">
+                        <label for="disease-history">История болезни</label>
+                        <input type="text" class="add-sample__disease-history" id="disease-history" name="caseHistory" th:value="*{caseHistory}">
+                    </div>
                     <div class="add-sample__form-group required">
                         <label for="date-disease">Дата заболевания</label>
                         <input type="text" class="add-sample__date-disease date" id="date-disease" name="dateDisease" th:value="*{dateDisease}" required>
@@ -222,31 +86,23 @@
                         <label for="volumeIn">Количество</label>
                         <input type="number" min="0" class="add-sample__volumeIn" id="volumeIn" name="volumeIn" th:value="*{volumeIn}">
                     </div>
-                    <div class="add-sample__form-group">
-                        <label for="purpose">Назначение образца</label>
-                        <input type="text" class="add-sample__purpose" id="purpose" name="sampleFunc" th:value="*{sampleFunc}">
-                    </div>
-                    <div class="add-sample__form-group">
-                        <label for="disease-history">История болезни</label>
-                        <input type="text" class="add-sample__disease-history" id="disease-history" name="caseHistory" th:value="*{caseHistory}">
-                    </div>
-
-                    <div class="add-sample__form-group required">
-                        <label for="provider">Поставщик образца</label>
-                        <select class="add-sample__provider" id="provider" name="providerId" th:value="*{providerId}" required>
-                            <option selected disabled></option>
-                            <option th:each="provider : ${providers}" th:value="${provider.getId()}" th:text="${provider.getProviderName()}"></option>
-                        </select>
-                    </div>
                 </div>
                 <div class="add-sample__right-block">
                     <div class="add-sample__form-group required">
                         <label for="season">Сезон</label>
                         <input type="text" class="add-sample__season" id="season" th:placeholder="${season}"
                                th:value="${season}" name="season" th:field="*{season}" required>
-
+                    </div>
+                    <div class="add-sample__form-group required">
                         <label for="lab-num">Лабораторный номер</label>
                         <input type="text" class="add-sample__lab-num" id="lab-num" name="labNum" th:value="*{labNum}" required>
+                    </div>
+                    <div class="add-sample__form-group required">
+                        <label for="provider">Поставщик образца</label>
+                        <select class="add-sample__provider" id="provider" name="providerId" th:value="*{providerId}" required>
+                            <option selected disabled></option>
+                            <option th:each="provider : ${providers}" th:value="${provider.getId()}" th:text="${provider.getProviderName()}"></option>
+                        </select>
                     </div>
                     <div class="add-sample__form-group required">
                         <label for="project">Проект</label>
@@ -262,6 +118,10 @@
                     <div class="add-sample__form-group">
                         <label for="project-add-num">Дополнительный номер</label>
                         <input type="text" class="add-sample__project-add-num" id="project-add-num" name="externalNum" th:value="*{externalNum}">
+                    </div>
+                    <div class="add-sample__form-group">
+                        <label for="purpose">Назначение образца</label>
+                        <input type="text" class="add-sample__purpose" id="purpose" name="sampleFunc" th:value="*{sampleFunc}">
                     </div>
                     <div class="add-sample__form-group">
                         <label for="notes">Особые примечания</label>
@@ -297,13 +157,4 @@
             </button>
         </form>
     </div>
-    <div class="loading" v-if="showPreloader">
-        <div class="loading__img"></div>
-    </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-    <script src="js/datepicker.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-</html>
+<div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

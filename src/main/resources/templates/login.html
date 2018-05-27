@@ -1,30 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Вход</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/balloon.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:insert="header :: head"></div>
 <body>
     <div class="logo logo-login"></div>
     <div class="login-socials-wrapper">
         <div class="popup">
             <div class="popup-content">
-                <form class="login-form auth-form" @submit="checkForm" method="post" novalidate="true">
+                <form class="login-form auth-form" ref="form" v-on:submit.prevent="checkForm" method="post" novalidate="true">
                     <div class="login-form__title">
                         Добро пожаловать! <div class="login-form__icon"><i class="far fa-user"></i></div>
                     </div>
-                    <div class="login-form__form-group" :class="{ error : hasError }" v-on:input="inputForm">
+                    <div class="login-form__form-group" :class="{ error : hasLoginError }" v-on:input="inputForm">
                         <label for="login">Логин</label>
                         <input type="text" class="login-form__form-control" name="login" v-model="login">
+                        <div class="error login-form__error-message" v-if="loginError != null">{{ loginError }}</div>
                     </div>
-                    <div class="login-form__form-group" :class="{ error : hasError }">
+                    <div class="login-form__form-group" :class="{ error : hasPasswordError }">
                         <label for="password">Пароль</label>
                         <input type="password" class="login-form__form-control" name="password" v-model="password" v-on:input="inputForm">
+                        <div class="error login-form__error-message" v-if="passwordError != null">{{ passwordError }}</div>
                     </div>
-                    <div class="error login-form__error-message" v-if="error != null">{{ error }}</div>
                     <button type="submit" class="btn btn-login">Войти</button>
                     <!-- <button type="button" class="btn btn-get-access" data-balloon="Запросите доступ к личному кабинету у администратора" data-balloon-pos="right">
                         Запросить доступ <span class="icon-wrapper"><i class="fas fa-question-circle"></i></span>
@@ -44,9 +39,4 @@
             </div>
         </div>
     </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-    <!--<script src="js/main.js"></script>-->
-</body>
-</html>
+<div th:include="footer :: scripts"></div>

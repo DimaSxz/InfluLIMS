@@ -2,26 +2,45 @@ $(function() {
     $('.date').each(function() {
         $(this).datepicker();
     });
+
+    $('.accordion, .add-extraction__filter .btn').on('click', function(e) {
+        if (e.target.id.indexOf('extraction-') != -1)
+            return;
+
+        if (!$(this).hasClass('active')) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    });
 });
 
 const auth = new Vue ({
     el: '.auth-form',
     data: {
         login: null,
+        loginError: null,
+        hasLoginError: false,
         password: null,
-        error: null,
-        hasError: false
+        passwordError: null,
+        hasPasswordError: false
     },
     methods: {
-        checkForm: function(e) {
-            e.preventDefault();
-            this.hasError = false;
-            this.error = null;
+        checkForm: function() {
+            this.loginError = null;
+            this.hasLoginError = false;
+            this.passwordError = null;
+            this.hasPasswordError = false;
 
-            if (!this.validPassword(this.password)) this.error = 'Длина пароля меньше 6 символов';
-            if (!this.validLogin(this.login)) this.error = 'Неверный формат логина';
+            if (!this.validPassword(this.password)) this.passwordError = 'Длина пароля меньше 6 символов';
+            if (!this.validOnEmpty(this.login)) this.loginError = 'Неверный формат логина';
 
-            if (this.error != null) this.hasError = true;
+            if (this.loginError === null && this.passwordError === null)
+                this.$refs.form.submit();
+
+            if (this.loginError != null) this.hasLoginError = true;
+            if (this.passwordError != null) this.hasPasswordError = true;
+
         },
         validLogin: function(login) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -30,6 +49,9 @@ const auth = new Vue ({
         validPassword: function(password) {
             if (password == null || password.length < 6) return false;
             return true;
+        },
+        validOnEmpty: function (value) {
+            return value !== null;
         },
         inputForm: function() {
             this.hasError = false;
@@ -59,8 +81,7 @@ const reg = new Vue ({
         hasPositionError: false
     },
     methods: {
-        checkForm: function (e) {
-            e.preventDefault();
+        checkForm: function () {
             this.emailError = null;
             this.hasEmailError = false;
             this.fullNameError = null;
@@ -69,7 +90,6 @@ const reg = new Vue ({
             this.hasLoginError = false;
             this.passwordError = null;
             this.hasPasswordError = false;
-            this.repeatPasswordError = null;
             this.positionError = null;
             this.hasPositionError = false;
 
@@ -80,11 +100,18 @@ const reg = new Vue ({
             if (!this.validRepeatPassword(this.repeatPassword)) this.passwordError = 'Пароли не совпадают';
             if (!this.validOnEmpty(this.position)) this.positionError = 'Поле не может быть пустым';
 
+            if (this.emailError === null && this.fullNameError === null
+                && this.loginError === null && this.PasswordError === null
+                && this.PositionError === null) {
+                this.$refs.form.submit();
+            }
+
             if (this.emailError != null) this.hasEmailError = true;
             if (this.fullNameError != null) this.hasFullNameError = true;
             if (this.loginError != null) this.hasLoginError = true;
             if (this.passwordError != null) this.hasPasswordError = true;
             if (this.positionError != null) this.hasPositionError = true;
+
         },
         validEmail: function (email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -99,7 +126,7 @@ const reg = new Vue ({
             return true;
         },
         validOnEmpty: function (value) {
-            return value !== null ? true : false;
+            return value !== null;
         },
         inputForm: function () {
             this.emailError = null;
@@ -122,10 +149,7 @@ const socials = new Vue ({
     data: {
         socials: [
             {className: 'vk', faClassName: 'vk'},
-            {className: 'ok', faClassName: 'odnoklassniki'},
-            {className: 'fb', faClassName: 'facebook'},
-            {className: 'g-plus', faClassName: 'google-plus-g'},
-            {className: 'yandex', faClassName: 'yandex'}
+            {className: 'ok', faClassName: 'odnoklassniki'}
         ]
     }
 });

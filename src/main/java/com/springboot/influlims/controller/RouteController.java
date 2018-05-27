@@ -56,4 +56,16 @@ public class RouteController {
 		model.addAttribute("season", helper.getSeason());
 		return "samples";
 	}
+
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public String sample(Model model) {
+		model.addAttribute("season", helper.getSeason());
+		return "sample";
+	}
+
+	@RequestMapping(value = "/provider-project", method = RequestMethod.GET)
+	public String providerProject(Model model) {
+		model.addAttribute("season", helper.getSeason());
+		return "provider-project";
+	}
 }
