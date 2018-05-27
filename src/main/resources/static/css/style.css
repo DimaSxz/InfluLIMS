@@ -484,7 +484,7 @@ header {
 }
 
 .content {
-    margin-top: 12vh;
+    margin-top: 13vh;
     margin-left: calc(18% + 3vw);
     margin-right: 3vw;
     padding: 0;
@@ -725,6 +725,10 @@ textarea {
     -webkit-transition: max-height .35s;
     -o-transition: max-height .35s;
     transition: max-height .35s;
+}
+
+.accordion-desc .info {
+    padding: 1rem;
 }
 
 .accordion__submenu {
@@ -1050,6 +1054,29 @@ textarea {
     background-color: red;
 }
 
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.info__left {
+    margin-right: 5rem;
+}
+
+.info__elem {
+    margin-bottom: 0.8rem;
+}
+
+.info__elem-name-wrapper {
+    display: inline-block;
+    width: 14rem;
+}
+
+.info__elem-name {
+    font-weight: 600;
+}
+
 @media all and (max-width: 1600px) {
     .side-menu {
         width: 20%;
@@ -1140,7 +1167,7 @@ textarea {
 
     .content {
         margin-left: 3vw;
-        margin-top: 15vh;
+        margin-top: 15.5vh;
     }
 
     .side-menu-toggle + .side-menu-icon {

@@ -4,7 +4,7 @@ $(function() {
     });
 
     $('.accordion, .add-extraction__filter .btn').on('click', function(e) {
-        if (e.target.id.indexOf('extraction-') != -1)
+        if (e.target.id.indexOf('extraction-') != -1 || $(e.target).hasClass('accordion-control'))
             return;
 
         if (!$(this).hasClass('active')) {
