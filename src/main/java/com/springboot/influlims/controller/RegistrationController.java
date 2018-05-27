@@ -11,9 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,7 +42,8 @@ public class RegistrationController {
 //		return null;
 //	}
 
-	@RequestMapping(method = RequestMethod.GET)
+//	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String registration(Model model, HttpServletRequest request) {
 
 		String checkAuthorisation = helper.checkAuth(request);
@@ -55,7 +54,8 @@ public class RegistrationController {
 		return "registration";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+//	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public String registration(@ModelAttribute("userForm") UserEntity userForm, BindingResult bindingResult, Model model) {
 
 		userValidator.validate(userForm, bindingResult);

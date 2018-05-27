@@ -1,12 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/balloon.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:insert="header :: head"></div>
 <body>
     <div class="logo logo-login"></div>
     <div class="login-socials-wrapper reg-wrapper">
@@ -56,10 +50,4 @@
             </div>
         </div>
     </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <!-- <script src="node_modules/vue-masked-input/dist/maskedInput.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-    <!--<script src="js/main.js"></script>-->
-</body>
-</html>
+<div th:include="footer :: scripts"></div>

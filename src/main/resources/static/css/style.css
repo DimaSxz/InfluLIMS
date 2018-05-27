@@ -677,6 +677,7 @@ textarea {
 
 .add-pcr__left-block,
 .add-extraction__left-block {
+    min-width: 35%;
     max-width: 45%;
     padding-right: 1.5vw;
     max-height: 80vh;
