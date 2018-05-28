@@ -4,7 +4,7 @@ $(function() {
     });
 
     $('.accordion, .add-extraction__filter .btn').on('click', function(e) {
-        if (e.target.id.indexOf('extraction-') != -1)
+        if (e.target.id.indexOf('extraction-') != -1 || $(e.target).hasClass('accordion-control'))
             return;
 
         if (!$(this).hasClass('active')) {
@@ -148,8 +148,7 @@ const socials = new Vue ({
     el: '.socials',
     data: {
         socials: [
-            {className: 'vk', faClassName: 'vk'},
-            {className: 'ok', faClassName: 'odnoklassniki'}
+            {className: 'vk', faClassName: 'vk'}
         ]
     }
 });

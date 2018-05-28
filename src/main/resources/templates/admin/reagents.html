@@ -1,43 +1,26 @@
 <div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
-    <div class="content employees">
-        <br>
-        <form action="#" th:action="@{/manage-reagents}" method="post">
+    <div class="content admin reagents">
+        <form action="#" th:action="@{/manage-reagents}" class="admin__form" method="post">
             <input type="hidden" name="reagentId" value="0">
-            <span>
-                <input type="text" name="reagentName" class="" required>
-            </span>
-            <span>
-                <select name="function" required>
-                    <option disabled selected></option>
-                    <option value="EXT">Экстракция</option>
-                    <option value="PCR">ПЦР</option>
-                </select>
-            </span>
-            <span>
-                <button type="submit" name="action" value="add" class="btn employees__btn-add">Добавить</button>
-            </span>
+            <input type="text" name="reagentName" class="" required>
+            <select name="function" required>
+                <option disabled selected></option>
+                <option value="EXT">Экстракция</option>
+                <option value="PCR">ПЦР</option>
+            </select>
+            <button type="submit" name="action" value="add" class="btn btn-add">Добавить</button>
         </form>
         <form action="#" th:action="@{/manage-reagents}" th:each="reagentType : ${reagentTypes}" method="post">
-            <input type="hidden" name="reagentId" th:value="${reagentType.id}">
-            <br>
-            <span>
-                <input type="text" name="reagentName" required th:value="${reagentType.reagentName}">
-            </span>
-            <span>
-                <select name="function">
-                    <option disabled selected></option>
-                    <option value="EXT">Экстракция</option>
-                    <option value="PCR">ПЦР</option>
-                </select>
-            </span>
-            <span>
-                <button type="submit" name="action" value="update" class="btn employees__btn-update">Обновить</button>
-            </span>
-            <span>
-                <button type="submit" name="action" value="delete" class="btn employees__btn-delete">Удалить</button>
-            </span>
+            <input type="hidden" name="reagentId" value="0">
+            <input type="text" name="reagentName" class="" required>
+            <select name="function" required>
+                <option disabled selected></option>
+                <option value="EXT">Экстракция</option>
+                <option value="PCR">ПЦР</option>
+            </select>
+            <button type="submit" name="action" value="add" class="btn btn-add">Добавить</button>
         </form>
-        <!--<form th:each="project : ${projects}" class="employees__form" action="#" th:action="@{/manage-projects}" method="post">-->
+        <!--<form th:each="project : ${projects}" class="reagents__form" action="#" th:action="@{/manage-projects}" method="post">-->
             <!--<br>-->
             <!--<input type="hidden" name="projectId" th:value="${project.id}">-->
             <!--<span th:text="${project.projectName}"></span>-->
@@ -47,10 +30,10 @@
                 <!--</label>-->
             <!--</span>-->
             <!--<span>-->
-                <!--<button type="submit" value="update" name="action" class="btn employees__btn-update">Обновить</button>-->
+                <!--<button type="submit" value="update" name="action" class="btn reagents__btn-update">Обновить</button>-->
             <!--</span>-->
             <!--<span>-->
-                <!--<button type="submit" value="delete" name="action" class="btn employees__btn-delete">Удалить</button>-->
+                <!--<button type="submit" value="delete" name="action" class="btn reagents__btn-delete">Удалить</button>-->
             <!--</span>-->
         <!--</form>-->
 

@@ -1,20 +1,13 @@
 <div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
-    <div class="content employees">
-        <form th:each="project : ${projects}" class="employees__form" action="#" th:action="@{/manage-projects}" method="post">
-            <br>
+    <div class="content admin projects">
+        <form th:each="project : ${projects}" class="admin__form projects__form" action="#" th:action="@{/manage-projects}" method="post">
             <input type="hidden" name="projectId" th:value="${project.id}">
-            <span>
-                <input th:value="${project.projectName}" type="text" name="projectName">
-            </span>
-            <span>
-                <button type="submit" value="update" name="action" class="btn employees__btn-update">Обновить</button>
-            </span>
-            <span>
-                <button type="submit" value="delete" name="action" class="btn employees__btn-delete">Удалить</button>
-            </span>
+            <input th:value="${project.projectName}" type="text" class="projects__name" name="projectName">
+            <button type="submit" value="update" name="action" class="btn btn-update">Обновить</button>
+            <button type="submit" value="delete" name="action" class="btn btn-delete">Удалить</button>
         </form>
-        <!--<form class="employees__form" action="">-->
-            <!--<table class="samples__table employees__table">-->
+        <!--<form class="projects__form" action="">-->
+            <!--<table class="samples__table projects__table">-->
                 <!--<thead>-->
                     <!--<th>ФИО</th>-->
                     <!--<th>Должность</th>-->
@@ -34,10 +27,10 @@
                             <!--</select>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-update">Обновить</button>-->
+                            <!--<button class="btn projects__btn-update">Обновить</button>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-delete">Удалить</button>-->
+                            <!--<button class="btn projects__btn-delete">Удалить</button>-->
                         <!--</td>-->
                     <!--</tr>-->
                     <!--<tr>-->
@@ -51,10 +44,10 @@
                             <!--</select>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-update">Обновить</button>-->
+                            <!--<button class="btn projects__btn-update">Обновить</button>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-delete">Удалить</button>-->
+                            <!--<button class="btn projects__btn-delete">Удалить</button>-->
                         <!--</td>-->
                     <!--</tr>-->
                     <!--<tr>-->
@@ -68,10 +61,10 @@
                             <!--</select>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-update">Обновить</button>-->
+                            <!--<button class="btn projects__btn-update">Обновить</button>-->
                         <!--</td>-->
                         <!--<td>-->
-                            <!--<button class="btn employees__btn-delete">Удалить</button>-->
+                            <!--<button class="btn projects__btn-delete">Удалить</button>-->
                         <!--</td>-->
                     <!--</tr>-->
                 <!--</tbody>-->

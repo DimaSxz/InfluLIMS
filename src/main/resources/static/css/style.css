@@ -217,7 +217,7 @@ textarea {
 .side-menu-toggle + .side-menu-icon {
     display: none;
     position: fixed;
-    top: 4vh;
+    top: 2.5rem;
     right: 3vw;
     font-size: 3vw;
     color: #485057;
@@ -440,6 +440,10 @@ header {
     position: relative;
 }
 
+.header__search-form {
+    margin-bottom: 0;
+}
+
 .header__search-form .icon {
     display: inline-block;
     position: absolute;
@@ -484,7 +488,7 @@ header {
 }
 
 .content {
-    margin-top: 12vh;
+    margin-top: 13vh;
     margin-left: calc(18% + 3vw);
     margin-right: 3vw;
     padding: 0;
@@ -725,6 +729,10 @@ textarea {
     -webkit-transition: max-height .35s;
     -o-transition: max-height .35s;
     transition: max-height .35s;
+}
+
+.accordion-desc .info {
+    padding: 1rem;
 }
 
 .accordion__submenu {
@@ -1050,6 +1058,78 @@ textarea {
     background-color: red;
 }
 
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.info__left {
+    margin-right: 5rem;
+}
+
+.info__elem {
+    margin-bottom: 0.8rem;
+}
+
+.info__elem-name-wrapper {
+    display: inline-block;
+    width: 14rem;
+}
+
+.info__elem-name {
+    font-weight: 600;
+}
+
+.projects__form > .form-group {
+    margin-bottom: 2.5rem;
+}
+
+.projects__form .btn-add {
+    margin-left: 2.5rem;
+}
+
+.btn-update {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-delete {
+    background-color: red;
+    color: white;
+}
+
+.admin form {
+    display: grid;
+    grid-template-columns: 25% 30% 10% 10%;
+    grid-gap: 1rem;
+    align-items: center;
+}
+
+.projects form {
+    grid-template-columns: 30% 10% 10%;
+}
+
+.admin .btn-add {
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.admin .admin__role,
+.projects .projects__name {
+    width: 100%;
+}
+
+.admin input:not([type='checkbox']),
+.admin select {
+    height: 4vh;
+}
+
+.providers form {
+    grid-template-columns: 17% 17% 17% 20% 10% 1fr;
+    align-items: flex-start;
+}
+
 @media all and (max-width: 1600px) {
     .side-menu {
         width: 20%;
@@ -1072,8 +1152,13 @@ textarea {
 @media all and (max-width: 1200px) {
     .login-socials-wrapper {
         top: 28%;
-        width: 70%;
-        margin-left: -35%;
+        width: 45%;
+        margin-left: -22.5%;
+    }
+
+    input:not([type='checkbox']), select, textarea {
+        width: 22vw;
+        max-width: 100%;
     }
 
     .popup {
@@ -1085,20 +1170,20 @@ textarea {
     }
 
     .login-form__title {
-        font-size: 1.65rem;
+        font-size: 1.25rem;
     }
 
     .login-form__form-group label,
     .login-form__form-group input {
-        font-size: 1.45rem;
+        font-size: 1rem;
     }
 
     .btn {
-        font-size: 1.35rem;
+        font-size: 1rem;
     }
 
     .btn-get-access {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .btn-get-access .icon-wrapper {
@@ -1106,7 +1191,7 @@ textarea {
     }
 
     .socials__title {
-        font-size: 1.55rem;
+        font-size: 1.2rem;
     }
 
     .socials__social-icon {
@@ -1134,13 +1219,13 @@ textarea {
     }
 
     .header__search-form .icon {
-        font-size: 2vw;
-        right: 1vw;
+        font-size: 1rem;
+        right: 0.5rem;
     }
 
     .content {
         margin-left: 3vw;
-        margin-top: 15vh;
+        margin-top: 15.5vh;
     }
 
     .side-menu-toggle + .side-menu-icon {
