@@ -1,68 +1,42 @@
 <div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
-    <div class="content employees">
-        <form class="employees__form" action="">
-            <table class="samples__table employees__table">
-                <thead>
-                    <th>ФИО</th>
-                    <th>Должность</th>
-                    <th>Права доступа</th>
-                    <th></th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Сотников Владислав Владимирович</td>
-                        <td>Доктор наук</td>
-                        <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Петров Дмитрий Владимирович</td>
-                        <td>Пидор</td>
-                        <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Тишков Иван Алексеевич</td>
-                        <td>Пес</td>
-                        <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="content admin reagents">
+        <form action="#" th:action="@{/manage-reagents}" class="admin__form" method="post">
+            <input type="hidden" name="reagentId" value="0">
+            <input type="text" name="reagentName" class="" required>
+            <select name="function" required>
+                <option disabled selected></option>
+                <option value="EXT">Экстракция</option>
+                <option value="PCR">ПЦР</option>
+            </select>
+            <button type="submit" name="action" value="add" class="btn btn-add">Добавить</button>
+        </form>
+        <form action="#" th:action="@{/manage-reagents}" th:each="reagentType : ${reagentTypes}" method="post">
+            <input type="hidden" name="reagentId" value="0">
+            <input type="text" name="reagentName" class="" required>
+            <select name="function" required>
+                <option disabled selected></option>
+                <option value="EXT">Экстракция</option>
+                <option value="PCR">ПЦР</option>
+            </select>
+            <button type="submit" name="action" value="add" class="btn btn-add">Добавить</button>
+        </form>
+        <!--<form th:each="project : ${projects}" class="reagents__form" action="#" th:action="@{/manage-projects}" method="post">-->
+            <!--<br>-->
+            <!--<input type="hidden" name="projectId" th:value="${project.id}">-->
+            <!--<span th:text="${project.projectName}"></span>-->
+            <!--<span>-->
+                <!--<label> Новое название-->
+                    <!--<input type="text" name="projectName">-->
+                <!--</label>-->
+            <!--</span>-->
+            <!--<span>-->
+                <!--<button type="submit" value="update" name="action" class="btn reagents__btn-update">Обновить</button>-->
+            <!--</span>-->
+            <!--<span>-->
+                <!--<button type="submit" value="delete" name="action" class="btn reagents__btn-delete">Удалить</button>-->
+            <!--</span>-->
+        <!--</form>-->
+
         </form>
     </div>
 <div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

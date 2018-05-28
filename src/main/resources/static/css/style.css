@@ -1085,9 +1085,35 @@ textarea {
     margin-left: 2.5rem;
 }
 
-.projects__form .btn-delete {
+.btn-update {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-delete {
     background-color: red;
     color: white;
+}
+
+.admin form {
+    display: grid;
+    grid-template-columns: 25% 30% 10% 10%;
+    grid-gap: 1rem;
+    align-items: center;
+}
+
+.projects form {
+    grid-template-columns: 30% 10% 10%;
+}
+
+.admin .btn-add {
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.admin .admin__role,
+.projects .projects__name {
+    width: 100%;
 }
 
 @media all and (max-width: 1600px) {

@@ -148,8 +148,7 @@ const socials = new Vue ({
     el: '.socials',
     data: {
         socials: [
-            {className: 'vk', faClassName: 'vk'},
-            {className: 'ok', faClassName: 'odnoklassniki'}
+            {className: 'vk', faClassName: 'vk'}
         ]
     }
 });
