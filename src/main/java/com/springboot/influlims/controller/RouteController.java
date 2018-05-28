@@ -37,13 +37,6 @@ public class RouteController {
 		return "admin/projects";
 	}
 
-//
-//	@RequestMapping(value = "/add-pcr", method = RequestMethod.GET)
-//	public String addPcr(Model model) {
-//		model.addAttribute("season", helper.getSeason());
-//		return "add-pcr";
-//	}
-
 	@RequestMapping(value = "/samples", method = RequestMethod.GET)
 	public String samples(Model model) {
 		model.addAttribute("season", helper.getSeason());
