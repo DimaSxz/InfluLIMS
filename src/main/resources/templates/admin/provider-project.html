@@ -1,21 +1,17 @@
 <div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
     <div class="content providers-projects">
-        <form action="" class="providers-projects__form">
+        <form action="#" th:action="@{/manage-providers-projects}" method="post" class="providers-projects__form">
             <div class="form-group providers-projects__form-providers">
                 <p>Выберите поставщика</p>
                 <select name="providerId">
                     <option disabled selected></option>
-                    <option value=""></option>
+                    <option th:each="provider : ${providers}" th:value="${provider.id}" th:text="${provider.providerName}"></option>
                 </select>
             </div>
             <div class="form-group providers-projects__form-projects">
                 <p>Выберите проекты</p>
                 <select name="projects" multiple>
-                    <option value="0" selected>Дебил</option>
-                    <option value="1">Бомж</option>
-                    <option value="2" selected>Клоун</option>
-                    <option value="3">Лох</option>
-                    <option value="4">Фееричный долбоеб</option>
+                    <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.projectName}"></option>
                 </select>
             </div>
             <div class="btn-group">
