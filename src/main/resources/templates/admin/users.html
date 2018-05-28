@@ -1,0 +1,22 @@
+<div th:include="header" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"></div>
+    <div class="content employees">
+        <form th:each="user : ${users}" class="employees__form" action="#" th:action="@{/manage-users}" method="post">
+            <br>
+            <input type="hidden" name="userId" th:value="${user.id}">
+            <span th:text="${user.login}"></span>
+            <span>
+                <select name="roleId">
+                    <option disabled selected></option>
+                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                </select>
+            </span>
+            <span>
+                <button th:data-user-id="${user.id}" type="submit" value="update" name="action" class="btn employees__btn-update">Обновить</button>
+            </span>
+            <span>
+                <button th:data-user-id="${user.id}" type="submit" value="delete" name="action" class="btn employees__btn-delete">Удалить</button>
+            </span>
+        </form>
+    </div>
+<div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

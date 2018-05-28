@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRoleDao extends JpaRepository<UserRoleEntity, Long> {}
+public interface UserRoleDao extends JpaRepository<UserRoleEntity, Long> {
+
+	public UserRoleEntity findByUserId(Long userId);
+
+}
