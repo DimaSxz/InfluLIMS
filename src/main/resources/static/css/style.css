@@ -440,6 +440,10 @@ header {
     position: relative;
 }
 
+.header__search-form {
+    margin-bottom: 0;
+}
+
 .header__search-form .icon {
     display: inline-block;
     position: absolute;
@@ -1116,6 +1120,16 @@ textarea {
     width: 100%;
 }
 
+.admin input:not([type='checkbox']),
+.admin select {
+    height: 4vh;
+}
+
+.providers form {
+    grid-template-columns: 17% 17% 17% 20% 10% 1fr;
+    align-items: flex-start;
+}
+
 @media all and (max-width: 1600px) {
     .side-menu {
         width: 20%;
@@ -1144,10 +1158,7 @@ textarea {
 
     input:not([type='checkbox']), select, textarea {
         width: 22vw;
-    }
-
-    .btn {
-        font-size: 1rem;
+        max-width: 100%;
     }
 
     .popup {
@@ -1159,7 +1170,7 @@ textarea {
     }
 
     .login-form__title {
-        font-size: 1.65rem;
+        font-size: 1.25rem;
     }
 
     .login-form__form-group label,
@@ -1168,11 +1179,11 @@ textarea {
     }
 
     .btn {
-        font-size: 1.35rem;
+        font-size: 1rem;
     }
 
     .btn-get-access {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .btn-get-access .icon-wrapper {
