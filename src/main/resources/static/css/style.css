@@ -1077,6 +1077,19 @@ textarea {
     font-weight: 600;
 }
 
+.projects__form > .form-group {
+    margin-bottom: 2.5rem;
+}
+
+.projects__form .btn-add {
+    margin-left: 2.5rem;
+}
+
+.projects__form .btn-delete {
+    background-color: red;
+    color: white;
+}
+
 @media all and (max-width: 1600px) {
     .side-menu {
         width: 20%;

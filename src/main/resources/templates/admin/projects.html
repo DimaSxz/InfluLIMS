@@ -1,170 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Панель управления</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/balloon.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-    <input type="checkbox" id="side-menu-toggle" class="side-menu-toggle">
-    <label for="side-menu-toggle" class="side-menu-icon">
-        <i class="fa fa-bars"></i>
-    </label>
-    <aside class="side-menu">
-        <div class="logo logo-menu"></div>
-        <div class="side-menu__season">
-            Текущий сезон: <span>2017-2018</span>
-        </div>
-        <ul class="side-menu__pages-list">
-            <li onclick="location.href='employees.html'">
-                Сотрудники
-            </li>
-            <li class="active" onclick="location.href='projects.html'">
-                Проекты
-            </li>
-            <li onclick="location.href='reagents.html'">
-                Реагенты
-            </li>
-            <li onclick="location.href='providers.html'">
-                Поставщики
-            </li>
-            <li onclick="location.href='../index.html'">
-                Выход
-            </li>
-        </ul>
-    </aside>
-    <header class="header">
-        <h3 class="header__title">Проекты</h3>
-        <div class="header__panel">
-            <div class="header__user-info">
-                <img class="header__avatar" src="../images/ivanov.jpg">
-                <span class="header__name">Иван Иванов</span>
-            </div>
-            <div class="header__notify">
-                <span class="header__notify-wrapper" @click="show = !show">
-                    <span class="header__notify-icon">
-                        <i class="far fa-bell"></i>
-                    </span>
-                    <span class="header__notify-quantity" v-if="alertCount > 0">{{ alertCount }}</span>
-                </span>
-                <transition name="fade">
-                    <div class="header__notify-content" v-if="show">
-                        <div class="header__alert">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close" @click="alertClose">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </div>
-                        <div class="header__alert" @click="alertClose">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </div>
-                        <div class="header__alert" @click="alertClose">
-                            <p class="header__alert-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, accusantium.</p>
-                            <span class="header__alert-close">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </div>
-                    </div>
-                </transition>
-            </div>
-            <div class="header__search">
-                <form class="header__search-form">
-                    <input type="text" class="header__search-input" placeholder="Поиск..." v-on:click="activeSearch = !activeSearch">
-                    <span class="icon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </form>
-                <div class="header__search-content" v-if="activeSearch">
-                    <div class="header__search-elem">
-                        <p>Человек №1</p>
-                    </div>
-                    <div class="header__search-elem">
-                        <p>Человек №2</p>
-                    </div>
-                    <div class="header__search-elem">
-                        <p>Человек №3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+<div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
     <div class="content employees">
-        <form class="employees__form" action="">
+        <form class="projects__form" action="">
+            <div class="form-group">
+                <input type="text" placeholder="Введите название проекта">
+                <button type="submit" class="btn btn-add">Добавить</button>
+            </div>
             <table class="samples__table employees__table">
                 <thead>
-                    <th>ФИО</th>
-                    <th>Должность</th>
-                    <th>Права доступа</th>
-                    <th></th>
+                    <th>Название проекта</th>
                     <th></th>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Сотников Владислав Владимирович</td>
-                        <td>Доктор наук</td>
                         <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
+                            <button class="btn btn-delete">Удалить</button>
                         </td>
                     </tr>
                     <tr>
-                        <td>Петров Дмитрий Владимирович</td>
-                        <td>Пидор</td>
+                        <td>Сотников Владислав Владимирович</td>
                         <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
+                            <button class="btn btn-delete">Удалить</button>
                         </td>
                     </tr>
                     <tr>
-                        <td>Тишков Иван Алексеевич</td>
-                        <td>Пес</td>
+                        <td>Сотников Владислав Владимирович</td>
                         <td>
-                            <select name="access">
-                                <option value="1">Бог</option>
-                                <option value="2">Лох</option>
-                                <option value="3">Бомж</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-update">Обновить</button>
-                        </td>
-                        <td>
-                            <button class="btn employees__btn-delete">Удалить</button>
+                            <button class="btn btn-delete">Удалить</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </div>
-    <div class="loading" v-if="showPreloader">
-        <div class="loading__img"></div>
-    </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-    <script src="../js/main.js"></script>
-</body>
-</html>
+<div th:include="footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

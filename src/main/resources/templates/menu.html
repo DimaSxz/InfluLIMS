@@ -1,65 +1,40 @@
-<aside class="side-menu" xmlns:sec="http://www.w3.org/1999/xhtml">
+<aside class="side-menu" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
     <a href="/" class="logo logo-menu"></a>
     <div class="side-menu__season">
-        Текущий сезон: <span>2017-2018</span>
+        Текущий сезон: <span th:text="${season}"></span>
     </div>
     <ul class="side-menu__pages-list">
-        <li class="accordion">
+        <li sec:authorize="hasAnyRole('ROLE_ADMIN')" class="accordion">
             <span class="side-menu__icon-container">
                 <i class="fas fa-newspaper"></i>
             </span>
             Администрирование
             <ul class="accordion__submenu">
-                <li>Сотрудники</li>
-                <li>Проекты</li>
-                <li>Поставщики</li>
-                <li>Реагенты</li>
+                <li><a href="/manage-users">Сотрудники</a></li>
+                <li><a href="/manage-projects">Проекты</a></li>
+                <li><a href="/manage-providers">Поставщики</a></li>
+                <li><a href="/manage-reagents">Реагенты</a></li>
             </ul>
         </li>
-        <li class="active" onclick="location.href='/main'">
+        <li onclick="location.href='/main'">
             <span class="side-menu__icon-container">
                 <i class="fas fa-newspaper"></i>
             </span>
             Новости
         </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_USERS_TEST', 'ROLE_MANAGE_USERS_NOTEST', 'ROLE_MANAGE_USERS_ALL')" onclick="location.href='/manage-users'">
-            <span class="side-menu__icon-container">
-                <i class="fas fa-users"></i>
-            </span>
-            Пользователи
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROVIDERS_TEST', 'ROLE_MANAGE_PROVIDERS_NOTEST', 'ROLE_MANAGE_PROVIDERS_ALL', 'ROLE_MANAGE_PROVIDERS_SELF')" onclick="location.href='/manage-providers'">
-            <span class="side-menu__icon-container">
-                <i class="fa fa-truck"></i>
-            </span>
-            Поставщики
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_PROJECTS_SELF', 'ROLE_MANAGE_PROJECTS_TEST', 'ROLE_MANAGE_PROJECTS_NOTEST', 'ROLE_MANAGE_PROJECTS_ALL')" onclick="location.href='/manage-projects'">
-            <span class="side-menu__icon-container">
-                <!--<i class="fas fa-user-secret"></i>-->
-                <i class="fa fa-list-alt"></i>
-            </span>
-            Проекты
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_MANAGE_REAGENTS_SELF', 'ROLE_MANAGE_REAGENTS_TEST', 'ROLE_MANAGE_REAGENTS_NOTEST', 'ROLE_MANAGE_REAGENTS_ALL')" onclick="location.href='/manage-projects'">
-            <span class="side-menu__icon-container">
-                <i class="fa fa-flask"></i>
-            </span>
-            Реагенты
-        </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_SAMPLE')" onclick="location.href='/add-sample'">
+        <li onclick="location.href='/add-sample'">
             <span class="side-menu__icon-container">
                 <i class="fa fa-plus"></i>
             </span>
             Регистрация образца
         </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_EXTRACTION')" onclick="location.href='/add-extraction'">
+        <li onclick="location.href='/add-extraction'">
             <span class="side-menu__icon-container">
                 <i class="fa fa-indent"></i>
             </span>
             Экстракция
         </li>
-        <li sec:authorize="hasAnyRole('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ADD_ALL', 'ROLE_ADD_PCR')" onclick="location.href='/add-pcr'">
+        <li onclick="location.href='/add-pcr'">
             <span class="side-menu__icon-container">
                 <i class="fa fa-spinner"></i>
             </span>

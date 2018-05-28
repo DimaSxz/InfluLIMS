@@ -19,14 +19,6 @@ public class AddExtractionForm {
 	private Date extractionDate;
 
 	private MultipartFile extractionFile;
-//
-//	public String[] getSamples() {
-//		return samples;
-//	}
-//
-//	public void setSamples(String[] samples) {
-//		this.samples = samples;
-//	}
 
 	public Long[] getSamples() {
 		return samples;

@@ -40,4 +40,13 @@ public class Helper {
 		}
 		return null;
 	}
+
+	public String checkAuth(HttpServletRequest request, String role) {
+		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals(role)) {
+			String redirect = request.getHeader("referer");
+			if(redirect != null && redirect.startsWith(host)) return "redirect:" + redirect;
+			return "redirect:/main";
+		}
+		return null;
+	}
 }

@@ -1,84 +1,53 @@
 <div th:include="header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
-    <div class="content add-extraction">
-        <form action="">
+    <div class="content add-extraction" th:if="${extractions != null}">
+        <form method="post" enctype="multipart/form-data" action="#" th:action="@{/add-pcr}" th:object="${addPcrForm}" >
             <div class="add-extraction__left-block">
-                <div class="accordion">
-                    <input type="checkbox" class="accordion-control" id="extraction-1">
-                    <label for="">Экстракция №1</label>
+                <div class="accordion" th:each="extraction : ${extractions}">
+                    <input type="checkbox" class="accordion-control" th:id="'ext-' + ${extraction.getId()}" th:value="${extraction.getId()}" name="extractions">
+                    <label th:for="'ext-' + ${extraction.getId()}" th:text="${extraction.getExtractionName()}"></label>
                     <div class="accordion-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <input type="checkbox" class="accordion-control" id="extraction-2">
-                    <label for="">Экстракция №2</label>
-                    <div class="accordion-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis eveniet explicabo consequuntur deleniti dolorem, eligendi assumenda perferendis natus cumque temporibus. Laborum architecto asperiores cumque, nisi animi consequatur, dolorum fuga quae unde perferendis labore quibusdam? Sit optio dolor nisi fugit adipisci exercitationem voluptatibus voluptates asperiores voluptas necessitatibus, perspiciatis molestiae quas saepe eum dolorum temporibus aliquid porro quam sed expedita explicabo fugiat inventore blanditiis at? Beatae obcaecati mollitia illum, inventore aliquam debitis, accusantium ducimus dignissimos quia ea libero praesentium quis a, iure quidem sequi. Aliquam vel aliquid reiciendis odio odit doloremque atque omnis deleniti tempora cumque quam est sapiente, quasi similique, quis consequuntur animi eos dicta inventore quia optio vero officia ad. Deleniti ex explicabo officia praesentium qui accusantium, nulla id exercitationem quis ut itaque voluptas ratione, illo animi voluptatibus quae quo atque incidunt consectetur architecto distinctio! Labore laboriosam repudiandae quo dignissimos vero molestiae asperiores nulla. A adipisci sequi voluptatum, tempora accusantium?</p>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <input type="checkbox" class="accordion-control" id="extraction-3">
-                    <label for="">Экстракция №3</label>
-                    <div class="accordion-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <input type="checkbox" class="accordion-control" id="extraction-4">
-                    <label for="">Экстракция №4</label>
-                    <div class="accordion-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis eveniet explicabo consequuntur deleniti dolorem, eligendi assumenda perferendis natus cumque temporibus. Laborum architecto asperiores cumque, nisi animi consequatur, dolorum fuga quae unde perferendis labore quibusdam? Sit optio dolor nisi fugit adipisci exercitationem voluptatibus voluptates asperiores voluptas necessitatibus, perspiciatis molestiae quas saepe eum dolorum temporibus aliquid porro quam sed expedita explicabo fugiat inventore blanditiis at? Beatae obcaecati mollitia illum, inventore aliquam debitis, accusantium ducimus dignissimos quia ea libero praesentium quis a, iure quidem sequi. Aliquam vel aliquid reiciendis odio odit doloremque atque omnis deleniti tempora cumque quam est sapiente, quasi similique, quis consequuntur animi eos dicta inventore quia optio vero officia ad. Deleniti ex explicabo officia praesentium qui accusantium, nulla id exercitationem quis ut itaque voluptas ratione, illo animi voluptatibus quae quo atque incidunt consectetur architecto distinctio! Labore laboriosam repudiandae quo dignissimos vero molestiae asperiores nulla. A adipisci sequi voluptatum, tempora accusantium?</p>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <input type="checkbox" class="accordion-control" id="extraction-5">
-                    <label for="">Экстракция №5</label>
-                    <div class="accordion-desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis eveniet explicabo consequuntur deleniti dolorem, eligendi assumenda perferendis natus cumque temporibus. Laborum architecto asperiores cumque, nisi animi consequatur, dolorum fuga quae unde perferendis labore quibusdam? Sit optio dolor nisi fugit adipisci exercitationem voluptatibus voluptates asperiores voluptas necessitatibus, perspiciatis molestiae quas saepe eum dolorum temporibus aliquid porro quam sed expedita explicabo fugiat inventore blanditiis at? Beatae obcaecati mollitia illum, inventore aliquam debitis, accusantium ducimus dignissimos quia ea libero praesentium quis a, iure quidem sequi. Aliquam vel aliquid reiciendis odio odit doloremque atque omnis deleniti tempora cumque quam est sapiente, quasi similique, quis consequuntur animi eos dicta inventore quia optio vero officia ad. Deleniti ex explicabo officia praesentium qui accusantium, nulla id exercitationem quis ut itaque voluptas ratione, illo animi voluptatibus quae quo atque incidunt consectetur architecto distinctio! Labore laboriosam repudiandae quo dignissimos vero molestiae asperiores nulla. A adipisci sequi voluptatum, tempora accusantium?</p>
+                        <p th:text="${extraction.getExtractionName()}"></p>
                     </div>
                 </div>
             </div>
             <div class="add-extraction__right-block">
-                <div class="add-extraction__filter">
-                    <p class="add-extraction__filter-title">Фильтр экстракций</p>
-                    <div class="add-extraction__filter-content">
-                        <button type="button" class="btn add-extraction__filter-option">№ образца</button>
-                        <button type="button" class="btn add-extraction__filter-option">Поставщик</button>
-                        <button type="button" class="btn add-extraction__filter-option">Проект</button>
-                        <button type="button" class="btn add-extraction__filter-option">№ набора</button>
-                        <button type="button" class="btn add-extraction__filter-option">Дата взятия образца</button>
-                        <button type="button" class="btn add-extraction__filter-option">Сезон</button>
-                    </div>
-                </div>
-                <form action="">
+                <!--<div class="add-extraction__filter">-->
+                    <!--<p class="add-extraction__filter-title">Фильтр экстракций</p>-->
+                    <!--<div class="add-extraction__filter-content">-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">№ образца</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Поставщик</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Проект</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">№ набора</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Дата взятия образца</button>-->
+                        <!--<button type="button" class="btn add-extraction__filter-option">Сезон</button>-->
+                    <!--</div>-->
+                <!--</div>-->
                     <div class="add-extraction__form-group required">
                         <label for="protocol-name">Название протокола</label>
-                        <input type="text" class="add-sample__protocol-name" id="protocol-name" required>
+                        <input type="text" class="add-sample__protocol-name" id="protocol-name" name="pcrName" th:value="*{pcrName}" required>
                     </div>
                     <div class="add-extraction__form-group required">
                         <label for="reagent-set">Набор реагентов</label>
-                        <input type="text" class="add-sample__reagent-set" id="reagent-set" required>
-                    </div>
-                    <div class="add-extraction__form-group">
-                        <label for="serial-set-num">Серийный номер набора</label>
-                        <input type="text" class="add-sample__serial-set-num" id="serial-set-num">
+                        <select class="add-sample__reagent-set" id="reagent-set" name="reagentId" th:value="*{reagentId}" required>
+                            <option selected disabled></option>
+                            <option th:each="reagent : ${reagents}" th:value="${reagent.getId()}" th:text="${reagent.getReagentTypeEntity().getReagentName()} + '#' +  ${reagent.getKitLot()}"></option>
+                        </select>
                     </div>
                     <div class="add-extraction__form-group">
                         <label for="pcr-report">Отчет прибора</label>
-                        <input type="file" class="add-sample__pcr-report" id="pcr-report">
+                        <input type="file" class="add-sample__pcr-report" id="pcr-report" name="pcrReport" th:value="*{pcrReport}">
                     </div>
                     <div class="add-extraction__form-group">
                         <label for="pcr-protocol">Протокол ПЦР</label>
-                        <input type="file" class="add-sample__pcr-protocol" id="pcr-protocol">
+                        <input type="file" class="add-sample__pcr-protocol" id="pcr-protocol" name="pcrProtocol" th:value="*{pcrProtocol}">
                     </div>
                     <div class="add-extraction__form-group">
                         <label for="pcr-date">Дата постановки ПЦР</label>
-                        <input type="text" class="add-sample__pcr-date date" id="pcr-date" required>
+                        <input type="text" class="add-sample__pcr-date date" id="pcr-date" name="pcrDate" th:value="*{pcrDate}" required>
                     </div>
                     <button type="submit" class="btn btn-add">
                         <i class="fa fa-plus"></i> Добавить
                     </button>
-                </form>
             </div>
         </form>
     </div>
