@@ -217,7 +217,7 @@ textarea {
 .side-menu-toggle + .side-menu-icon {
     display: none;
     position: fixed;
-    top: 4vh;
+    top: 2.5rem;
     right: 3vw;
     font-size: 3vw;
     color: #485057;
@@ -1138,8 +1138,16 @@ textarea {
 @media all and (max-width: 1200px) {
     .login-socials-wrapper {
         top: 28%;
-        width: 70%;
-        margin-left: -35%;
+        width: 45%;
+        margin-left: -22.5%;
+    }
+
+    input:not([type='checkbox']), select, textarea {
+        width: 22vw;
+    }
+
+    .btn {
+        font-size: 1rem;
     }
 
     .popup {
@@ -1156,7 +1164,7 @@ textarea {
 
     .login-form__form-group label,
     .login-form__form-group input {
-        font-size: 1.45rem;
+        font-size: 1rem;
     }
 
     .btn {
@@ -1172,7 +1180,7 @@ textarea {
     }
 
     .socials__title {
-        font-size: 1.55rem;
+        font-size: 1.2rem;
     }
 
     .socials__social-icon {
@@ -1200,8 +1208,8 @@ textarea {
     }
 
     .header__search-form .icon {
-        font-size: 2vw;
-        right: 1vw;
+        font-size: 1rem;
+        right: 0.5rem;
     }
 
     .content {
