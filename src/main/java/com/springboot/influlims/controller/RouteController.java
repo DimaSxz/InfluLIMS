@@ -19,12 +19,6 @@ public class RouteController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/manage-providers", method = RequestMethod.GET)
-	public String manageProviders(Model model) {
-		model.addAttribute("season", helper.getSeason());
-		return "admin/providers";
-	}
-
 	@RequestMapping(value = "/samples", method = RequestMethod.GET)
 	public String samples(Model model) {
 		model.addAttribute("season", helper.getSeason());
@@ -35,11 +29,5 @@ public class RouteController {
 	public String sample(Model model) {
 		model.addAttribute("season", helper.getSeason());
 		return "sample";
-	}
-
-	@RequestMapping(value = "/provider-project", method = RequestMethod.GET)
-	public String providerProject(Model model) {
-		model.addAttribute("season", helper.getSeason());
-		return "provider-project";
 	}
 }
