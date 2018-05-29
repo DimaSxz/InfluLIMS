@@ -33,7 +33,9 @@
             <div class="socials__content">
                 <ul class="socials__socials-list">
                     <li v-for="social in socials" class="socials__social-icon" :class="social.className">
-                        <i class="fab" :class="'fa-' + social.faClassName"></i>
+                        <a th:href="${vkAuthUrl}">
+                            <i class="fab" :class="'fa-' + social.faClassName"></i>
+                        </a>
                     </li>
                 </ul>
             </div>

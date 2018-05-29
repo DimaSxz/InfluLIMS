@@ -30,4 +30,5 @@ public class RouteController {
 		model.addAttribute("season", helper.getSeason());
 		return "sample";
 	}
+
 }

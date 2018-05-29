@@ -1,7 +1,9 @@
 package com.springboot.influlims.controller;
 
 import com.springboot.influlims.service.Helper;
+import com.springboot.influlims.service.VkAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class LoginController {
 	@Autowired
 	private Helper helper;
 
+	@Autowired
+	private VkAuthService vkAuthService;
+
 //	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping
 	public String login(Model model, String error, String logout, HttpServletRequest request) {
@@ -36,6 +41,7 @@ public class LoginController {
 			model.addAttribute("message", "Logged out successfully.");
 		}
 
+		model.addAttribute("vkAuthUrl", vkAuthService.getAuthUrl());
 		return "login";
 	}
 
