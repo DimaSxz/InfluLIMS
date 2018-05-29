@@ -3,6 +3,7 @@ package com.springboot.influlims.controller;
 import com.springboot.influlims.entity.UserEntity;
 import com.springboot.influlims.service.Helper;
 import com.springboot.influlims.service.SecurityServiceImpl;
+import com.springboot.influlims.service.UserServiceImpl;
 import com.springboot.influlims.service.interfaces.SecurityService;
 import com.springboot.influlims.service.interfaces.UserService;
 import com.springboot.influlims.validator.UserValidator;
@@ -22,7 +23,7 @@ public class RegistrationController {
 	private static final String host = "localhost:8080/";
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@Autowired
 	private SecurityServiceImpl securityService;

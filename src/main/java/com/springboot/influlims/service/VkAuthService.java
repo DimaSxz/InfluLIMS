@@ -79,6 +79,10 @@ public class VkAuthService {
 		return networkName;
 	}
 
+	public Integer getUserId() {
+		return (authorized) ? authResponse.getUserId() : null;
+	}
+
 	public String getEmail() {
 		return (authorized) ? authResponse.getEmail() : null;
 	}
@@ -106,4 +110,55 @@ public class VkAuthService {
 		}
 	}
 
+	public Integer getClientId() {
+		return clientId;
+	}
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	public String getRedirectURI() {
+		return redirectURI;
+	}
+
+	public String getDisplay() {
+		return display;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public String getResponseType() {
+		return responseType;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public boolean isAuthorized() {
+		return authorized;
+	}
+
+	public VkApiClient getVk() {
+		return (authorized) ? vk : null;
+	}
+
+	public UserActor getActor() {
+		return (authorized) ? actor : null;
+	}
+
+	public UserAuthResponse getAuthResponse() {
+		return (authorized) ? authResponse : null;
+	}
+
+	public UserXtrCounters getUserXtrCounter() {
+		return (authorized) ? userXtrCounter : null;
+	}
 }
