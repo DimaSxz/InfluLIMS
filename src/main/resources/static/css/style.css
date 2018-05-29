@@ -595,7 +595,7 @@ header {
 input:not([type='checkbox']),
 select,
 textarea {
-    width: 15vw;
+    width: 12vw;
     max-width: 100%;
     font-size: 1vw;
     padding: 0.8vh 1vw;
