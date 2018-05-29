@@ -27,6 +27,8 @@ import java.util.Random;
 @RequestMapping("/manage-reagents")
 public class ManageReagentsController {
 
+	private static final String title = "Реагенты";
+
 	@Autowired
 	private Helper helper;
 
@@ -41,6 +43,7 @@ public class ManageReagentsController {
 
 	@GetMapping
 	public String manageReagents(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("reagentTypes", reagentTypeDao.findAll());
 		return "admin/reagents";

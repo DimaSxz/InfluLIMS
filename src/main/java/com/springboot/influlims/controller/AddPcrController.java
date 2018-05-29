@@ -26,6 +26,8 @@ import java.util.*;
 @RequestMapping("/add-pcr")
 public class AddPcrController {
 
+	private static final String title = "ПЦР";
+
 	@Autowired
 	private Helper helper;
 
@@ -49,6 +51,7 @@ public class AddPcrController {
 
 	@GetMapping
 	public String addPcr(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("extractions", extractionDao.findAll());
 		Collection<ReagentTypeEntity> reagentTypeEntities = reagentTypeDao.getAllByFunction(ReagentFunction.PCR);

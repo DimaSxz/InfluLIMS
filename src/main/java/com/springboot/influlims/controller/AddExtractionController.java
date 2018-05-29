@@ -22,6 +22,8 @@ import java.util.HashSet;
 @RequestMapping("/add-extraction")
 public class AddExtractionController {
 
+	private static final String title = "Экстракция";
+
 	@Autowired
 	private Helper helper;
 
@@ -45,6 +47,7 @@ public class AddExtractionController {
 
 	@GetMapping
 	public String addExtraction(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("samples", sampleDao.findAll());
 		Collection<ReagentTypeEntity> reagentTypeEntities = reagentTypeDao.getAllByFunction(ReagentFunction.EXT);

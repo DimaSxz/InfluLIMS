@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PcrDao extends JpaRepository<PcrEntity, Long> {}
+public interface PcrDao extends JpaRepository<PcrEntity, Long> {
+	Long countByExtractionId(Long ExtractionId);
+}

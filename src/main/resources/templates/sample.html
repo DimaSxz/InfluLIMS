@@ -4,41 +4,107 @@
             <div class="info__left">
                 <div class="info__elem">
                     <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
+                        <span class="info__elem-name">Лабораторный №</span>:
                     </span>
-                    <span class="info__elem-val">14.04.1997</span>
+                    <span class="info__elem-val" th:text="${sample.labNum}"></span>
                 </div>
                 <div class="info__elem">
                     <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
+                        <span class="info__elem-name">Тип образца</span>:
                     </span>
-                    <span class="info__elem-val">Пидор</span>
+                    <span class="info__elem-val" th:text="${sample.sampleType}"></span>
                 </div>
                 <div class="info__elem">
                     <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
+                        <span class="info__elem-name">Постмортальный</span>:
                     </span>
-                    <span class="info__elem-val">123456789</span>
+                    <span class="info__elem-val" th:text="${sample.samplePm}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Материала на входе</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.volumeIn}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Дата получения</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.dateReceipt}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Дата заболевания</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.dateDisease}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Дата взятия</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.dateCollection}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Сезон</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.season}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Дата записи</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.createdAt}"></span>
+                </div>
+                <div class="info__elem">
+                    <span class="info__elem-name-wrapper">
+                        <span class="info__elem-name">Дата обновления</span>:
+                    </span>
+                    <span class="info__elem-val" th:text="${sample.updatedAt}"></span>
                 </div>
             </div>
             <div class="info__right">
-                <div class="info__elem">
-                    <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
-                    </span>
-                    <span class="info__elem-val">14.04.1997</span>
+                <div th:each="ext : ${exts}">
+                    <h3 th:text="'Экстракция №' + ${ext.extractionName}"></h3>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Количество на входе</span>:
+                        </span>
+                        <span class="info__elem-val" th:text="${ext.volumeIn}"></span>
+                    </div>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Количество на выходе</span>:
+                        </span>
+                        <span class="info__elem-val" th:text="${ext.volumeOut}"></span>
+                    </div>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Протокол</span>:
+                        </span>
+                        <a target="_blank" th:href="${storage.getPuthToExt(ext.extractionProtocol)}" class="info__elem-val" th:text="${ext.extractionProtocol}"></a>
+                    </div>
                 </div>
-                <div class="info__elem">
-                    <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
-                    </span>
-                    <span class="info__elem-val"></span>
-                </div>
-                <div class="info__elem">
-                    <span class="info__elem-name-wrapper">
-                        <span class="info__elem-name">Дата создания записи</span>:
-                    </span>
-                    <span class="info__elem-val">123456789</span>
+                <div th:each="pcr : ${pcrs}">
+                    <h3 th:text="'ПЦР №' + ${pcr.pcrName}"></h3>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Протокол</span>:
+                        </span>
+                        <a target="_blank" th:href="${storage.getPuthToPcrProto(pcr.pcrProtocol)}" class="info__elem-val" th:text="${pcr.pcrProtocol}"></a>
+                    </div>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Отчёт</span>:
+                        </span>
+                        <a target="_blank" th:href="${storage.getPuthToPcrRepo(pcr.pcrReport)}" class="info__elem-val" th:text="${pcr.pcrReport}"></a>
+                    </div>
+                    <div class="info__elem">
+                        <span class="info__elem-name-wrapper">
+                            <span class="info__elem-name">Дата проведения</span>:
+                        </span>
+                        <span class="info__elem-val" th:text="${pcr.pcrDate}"></span>
+                    </div>
                 </div>
             </div>
         </div>

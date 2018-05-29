@@ -20,6 +20,8 @@ import java.security.Principal;
 @RequestMapping("/manage-users")
 public class ManageUsersController {
 
+	private static final String title = "Сотрудники";
+
 	@Autowired
 	private Helper helper;
 
@@ -34,6 +36,7 @@ public class ManageUsersController {
 
 	@GetMapping
 	public String manageProjects(Model model, HttpServletRequest request) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("users", userDao.findAll());
 		model.addAttribute("roles", roleDao.findAll());

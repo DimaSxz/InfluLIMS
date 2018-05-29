@@ -24,6 +24,8 @@ import java.security.Principal;
 @RequestMapping("/manage-providers")
 public class ManageProvidersController {
 
+	private static final String title = "Поставщики";
+
 	@Autowired
 	private Helper helper;
 
@@ -38,6 +40,7 @@ public class ManageProvidersController {
 
 	@GetMapping
 	public String manageProviders(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("providers", providerDao.findAll());
 		model.addAttribute("regions", regionDao.findAll());

@@ -60,46 +60,18 @@
                     <th>Источник</th>
                     <th>Сезон</th>
                     <th>Дата добавления</th>
-                    <th>Экстракции</th>
-                    <th>ПЦР</th>
                     <th>Подробнее</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>2017-2018</td>
-                    <td>14.04.2017</td>
-                    <td>0</td>
-                    <td>1</td>
+                <tr th:each="sample : ${samples}">
+                    <td th:text="${sample.labNum}"></td>
+                    <td th:text="${sample.providerProjectEntity.projectEntity.projectName}"></td>
+                    <td th:text="${sample.providerProjectEntity.providerEntity.providerName}"></td>
+                    <td th:text="${sample.season}"></td>
+                    <td th:text="${sample.createdAt}"></td>
                     <td>
-                        <a href="#"><button class="btn samples__btn-more">Подробнее</button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>2017-2018</td>
-                    <td>14.04.2017</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>
-                        <a href="#"><button class="btn samples__btn-more">Подробнее</button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>2017-2018</td>
-                    <td>14.04.2017</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>
-                        <a href="#"><button class="btn samples__btn-more">Подробнее</button></a>
+                        <a th:href="'/sample/' + ${sample.id}"><button class="btn samples__btn-more">Подробнее</button></a>
                     </td>
                 </tr>
             </tbody>

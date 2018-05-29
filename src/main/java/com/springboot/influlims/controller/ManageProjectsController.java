@@ -17,6 +17,8 @@ import java.security.Principal;
 @RequestMapping("/manage-projects")
 public class ManageProjectsController {
 
+	private static final String title = "Проекты";
+
 	@Autowired
 	private Helper helper;
 
@@ -25,6 +27,7 @@ public class ManageProjectsController {
 
 	@GetMapping
 	public String manageProjects(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("projects", projectDao.findAll());
 		return "admin/projects";

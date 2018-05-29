@@ -21,6 +21,8 @@ import java.util.GregorianCalendar;
 @RequestMapping("/add-sample")
 public class AddSampleController {
 
+	private static final String title = "Регистрация образца";
+
 	@Autowired
 	private PatientDao patientDao;
 
@@ -51,6 +53,7 @@ public class AddSampleController {
 //	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping
 	public String addSample(ModelMap model, String success) {
+		model.addAttribute("title", title);
 		if(success != null) model.addAttribute("addSuccess", "Sample successfully added!");
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("providers", providerDao.findAll());

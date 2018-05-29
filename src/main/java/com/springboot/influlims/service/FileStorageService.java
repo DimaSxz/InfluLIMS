@@ -50,6 +50,23 @@ public class FileStorageService {
 			pcrRepo.mkdirs();
 	}
 
+
+	public String getPuthToExt(final String fileName) {
+		return getPuthToFile(fileName, extractionPath);
+	}
+	public String getPuthToPcrRepo(final String fileName) {
+		return getPuthToFile(fileName, pcrReportPath);
+	}
+	public String getPuthToPcrProto(final String fileName) {
+		return getPuthToFile(fileName, pcrProtocolPath);
+	}
+
+	private String getPuthToFile(final String fileName, final String basePath) {
+		String path = servletContext.getRealPath(basePath);
+		File file = new File(path + fileName);
+		return file.getAbsolutePath();
+	}
+
 	public MultipartFile getExtractionFile(String fileName) {
 		return getFile(extractionPath, fileName);
 	}

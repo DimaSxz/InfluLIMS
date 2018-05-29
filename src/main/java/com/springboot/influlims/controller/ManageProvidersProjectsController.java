@@ -27,6 +27,8 @@ import java.util.HashSet;
 @RequestMapping("/manage-providers-projects")
 public class ManageProvidersProjectsController {
 
+	private static final String title = "Поставщики - Проекты";
+
 	@Autowired
 	private Helper helper;
 
@@ -44,6 +46,7 @@ public class ManageProvidersProjectsController {
 
 	@GetMapping
 	public String manageProvidersProjects(Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("season", helper.getSeason());
 		model.addAttribute("providers", providerDao.findAll());
 		model.addAttribute("projects", projectDao.findAll());
