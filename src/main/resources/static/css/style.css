@@ -118,7 +118,7 @@ textarea {
 }
 
 .btn {
-    font-size: 15px;
+    font-size: 1rem;
     padding: 0.35rem 1rem;
     border: none;
     border-radius: 2.5px;
@@ -596,6 +596,7 @@ input:not([type='checkbox']),
 select,
 textarea {
     width: 15vw;
+    max-width: 100%;
     font-size: 1vw;
     padding: 0.8vh 1vw;
     border-color: rgb(166, 166, 166);
@@ -653,7 +654,7 @@ textarea {
 }
 
 .btn-add {
-    font-size: 1.2vw;
+    font-size: 1.2rem;
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: #28a745;
@@ -1158,7 +1159,6 @@ textarea {
 
     input:not([type='checkbox']), select, textarea {
         width: 22vw;
-        max-width: 100%;
     }
 
     .popup {
@@ -1175,10 +1175,6 @@ textarea {
 
     .login-form__form-group label,
     .login-form__form-group input {
-        font-size: 1rem;
-    }
-
-    .btn {
         font-size: 1rem;
     }
 
